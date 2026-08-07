@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.11-bookworm
 
 RUN apt-get update && apt-get install -y \
     wkhtmltopdf \
@@ -9,6 +9,8 @@ WORKDIR /app
 COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
+
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 10000
 
