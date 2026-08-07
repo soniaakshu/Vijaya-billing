@@ -15,8 +15,6 @@ import sys
 import threading
 import webbrowser
 
-from waitress import serve
-
 app = Flask(__name__)
 
 # --------------------------------------------------
@@ -139,7 +137,6 @@ def open_browser():
     webbrowser.open("http://127.0.0.1:5000")
 
 if __name__ == "__main__":
-
     threading.Timer(1.5, open_browser).start()
 
     print("=" * 60)
@@ -147,8 +144,4 @@ if __name__ == "__main__":
     print("Open: http://127.0.0.1:5000")
     print("=" * 60)
 
-    serve(
-        app,
-        host="127.0.0.1",
-        port=5000
-    )
+    app.run(host="127.0.0.1", port=5000)
