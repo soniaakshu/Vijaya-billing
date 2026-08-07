@@ -1,0 +1,471 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-body p-4">
+
+            <form method="POST" action="{{ url_for('save_invoice') }}">
+                <input type="hidden" name="company" value="prakash">
+
+                <!-- Invoice Heading -->
+
+                <div class="row mb-3">
+
+                    <div class="col-12">
+
+                        <h3 class="text-center fw-bold">
+                            Invoice / Credit
+                        </h3>
+
+                    </div>
+
+                </div>
+
+                <!-- Company -->
+
+                <div class="row align-items-start">
+
+                    <div class="col-md-9">
+
+                        <h2 class="text-primary">
+                            K.S. PRAKASH MILK POINT
+                        </h2>
+
+                        <h5 class="mt-3">
+                            Dealers : TELANGANA VIJAYA DAIRY
+                        </h5>
+
+                        <p class="mt-2">
+                            Cell : 9248933593 , 9030812416 <br>
+                            Venkateshwara Colony, Saroornagar,<br>
+                            Hyderabad - 500035
+                        </p>
+                    
+                    </div>
+
+                    <div class="col-md-3 text-end">
+
+                        <img src="{{ url_for('static', filename='images/logo.png') }}"
+                             width="150">
+
+                        <br><br>
+
+                        <b>Date :</b>
+                        <span id="currentDate"></span>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- Bill -->
+
+                <div class="row align-items-end mb-3">
+
+                    <div class="col-md-3">
+
+                        <label><b>Bill No</b></label>
+
+                        <input
+                            type="text"
+                            name="bill_no"
+                            class="form-control"
+                            required>
+
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <label><b>Customer</b></label>
+
+                        <select
+                            id="customer"
+                            name="customer"
+                            class="form-select"
+                            required>
+
+                            <option>Select Customer</option>
+
+                            <option>TGSWRS COE Girls (Falaknuma)</option>
+                            <option>TGMRJC BARKAS BOYS-1 (Peely Dargha)</option>
+                            <option>TGMRS YAKATHPURA GIRLS-2</option>
+                            <option>TGMRS CHARMINAR BOYS-2 (Jella Pally Road)</option>
+                            <option>TGMRJC SAIDABAD BOYS-1 (Musarambagh)</option>
+                            <option>TGMRS SAIDABAD GIRLS-1 (Amberpet)</option>
+                            <option>TGMRS UPPAL GIRLS-1 (Nacharam)</option>
+                            <option>TGMRS MALKAJGIRI GIRLS (Boduppal)</option>
+                            <option>TGMRS/JC HAYATHNAGAR BOYS-1 (Uppal)</option>
+                            <option>TGMRJC BALANAGAR GIRLS-1 (L.B. Nagar)</option>
+                            <option>TGMRS BARKAS GIRLS-1 (Vanasthalipuram)</option>
+                            <option>TGMRS SECUNDERABAD BOYS-1 (Autonagar)</option>
+                            <option>TGMRJC BARKAS GIRLS-1 (Autonagar)</option>
+                            <option>TGMRS CHANDRAYANGUTTA BOYS-1</option>
+                            <option>TGMRS/JC AMBERPET BOYS-1 (Hayathnagar)</option>
+                            <option>TGMRS KHAIRTHABAD BOYS-1 (Gurramguda)</option>
+                            <option>TGMRS BALAPUR BOYS-1 (Gurramguda)</option>
+                            <option>TGMRJC BALAPUR BOYS-1 (Gurramguda)</option>
+                            <option>TGMRJC KHAIRATHABAD BOYS-1 (B.N.Reddy)</option>
+                            <option>TGMRS JUBILEE HILLS BOYS-1 (T.K.R. Kamman)</option>
+                            <option>TGMRJC CHANDRAYAN GUTTA BOYS-1 (T.K.R. Kamman)</option>
+                            <option>TGMRS ASIF NAGAR BOYS-2 (L.B. Nagar)</option>
+                            <option>MJPTBC NAGOLE COE GIRLS</option>
+                            <option>TGMRS BALANAGAR GIRLS (Anand Nagar)</option>
+                            <option>TGMRS/JC KHAIRTHABAD GIRLS-1 (King Koti)</option>
+                            <option>TGMRS ASIF NAGAR GIRLS-1 (Lakdikapul)</option>
+                            <option>TGMRS ASIF NAGAR BOYS-1</option>
+                            <option>GOVT ST COLLEGE BOYS HOSTEL-REDHILLS</option>
+                            <option>ST BOYS HOSTEL KOYA SARASWATHINAGAR</option>
+                            <option>GOVT.STEBH SAIDABAD</option>
+                            <option>TGMRS JC GOLCONDA BOYS-1</option>
+                            <option>TGMRS GOLCONDA GIRLS-1</option>
+                            <option>TMRJC GOLCONDA GIRLS-1</option>
+                            <option>TGMRS GOLCONDA GIRLS-2</option>
+                            <option>MJPTBCWRJC GHATKESAR COE GIRLS (Boduppal)</option>
+                            <option>TGRS/JC BOYS (Borabanda)</option>
+                            <option>TGRS/JC GIRLS BORABANDA</option>
+                            <option>TGSWRS/JC GIRLS NARSINGI</option>
+
+                            <option value="Others">Others</option>
+
+                        </select>
+
+                        <input
+                            id="otherCustomer"
+                            class="form-control mt-2"
+                            placeholder="Enter Customer Name"
+                            style="display:none;">
+
+                    </div>
+
+                </div>
+
+                <!-- Dates -->
+
+                <div class="row mb-3">
+
+                    <div class="col-md-3">
+
+                        <label><b>From Date</b></label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="from_date">
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label><b>To Date</b></label>
+
+                        <input
+                            type="date"
+                            class="form-control"
+                            name="to_date">
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <table class="table table-bordered" id="productTable">
+
+                    <thead class="table-primary">
+
+<tr>
+
+    <th rowspan="2">S.No</th>
+    <th rowspan="2">Date</th>
+    <th rowspan="2">Product</th>
+    <th rowspan="2">Price</th>
+    <th rowspan="2">Qty</th>
+    <th rowspan="2">Actual Amt</th>
+
+    <th colspan="2">CGST</th>
+
+    <th colspan="2">SGST</th>
+
+    <th rowspan="2">Total</th>
+
+    <th rowspan="2">Action</th>
+
+</tr>
+
+<tr>
+
+    <th>%</th>
+    <th>Amt</th>
+
+    <th>%</th>
+    <th>Amt</th>
+
+</tr>
+
+</thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>1</td>
+
+                            <td>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    name="item_date[]">
+                            </td>
+
+                            <td>
+
+                                <select
+                                    class="form-select product"
+                                    name="product[]">
+
+                                    <option>Milk</option>
+                                    <option>Curd</option>
+                                    <option>Paneer</option>
+                                    <option>Ghee</option>
+                                    <option>Ice Cream</option>
+                                    <option>Doodhpeda</option>
+                                    <option>Kowa</option>
+                                    <option>Cake</option>
+                                    <option value="Others">Others</option>
+
+                                </select>
+
+                                <input
+                                    class="form-control mt-2 otherProduct"
+                                    placeholder="Product Name"
+                                    style="display:none;">
+
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    class="form-control price"
+                                    name="price[]">
+                            </td>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    class="form-control qty"
+                                    name="qty[]">
+                            </td>
+                            <td>
+
+<input
+type="text"
+class="form-control actualAmt"
+name="actual_amt[]"
+value="0.00"
+readonly>
+
+</td>                           
+
+                           <td>
+
+<input
+    type="number"
+    class="form-control cgst"
+    name="cgst[]"
+    value="2.5"
+    min="0"
+    step="any">
+</td>
+
+<td>
+
+<input
+type="text"
+class="form-control cgstAmt"
+name="cgst_amt[]"
+value="0.00"
+readonly>
+
+</td>
+
+                          <td>
+
+<input
+    type="number"
+    class="form-control sgst"
+    name="sgst[]"
+    value="2.5"
+    min="0"
+    step="any">
+
+</td>
+
+<td>
+
+<input
+type="text"
+class="form-control sgstAmt"
+name="sgst_amt[]"
+value="0.00"
+readonly>
+
+</td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control total"
+                                    name="total[]"
+                                    readonly>
+                            </td>
+
+                            <td>
+
+                                <button
+                                    type="button"
+                                    class="btn btn-danger deleteRow">
+
+                                    Delete
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    id="addRow">
+
+                    + Add Product
+
+                </button>
+
+                <hr>
+                                <h3 class="text-end">
+
+                    Grand Total :
+                    ₹ <span id="grandTotal">0.00</span>
+
+                </h3>
+
+                <br>
+
+                <div class="text-end">
+
+                    <b>Signature :</b>
+
+                    ______________________
+
+                </div>
+
+                <br>
+
+                <div class="text-center">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        name="action"
+                        value="save">
+
+                        Save Invoice
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning"
+                        name="action"
+                        value="print">
+
+                        Print
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-danger"
+                        name="action"
+                        value="pdf">
+
+                        Download PDF
+
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // Current Date
+
+    let today = new Date();
+
+    let day = String(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let year = today.getFullYear();
+
+    document.getElementById("currentDate").innerHTML =
+        day + "-" + month + "-" + year;
+
+    // Other Customer textbox
+
+    const customer = document.getElementById("customer");
+    const otherCustomer = document.getElementById("otherCustomer");
+
+    customer.addEventListener("change", function () {
+
+        if (this.value === "Others") {
+
+            otherCustomer.style.display = "block";
+            otherCustomer.setAttribute("name", "customer");
+
+        } else {
+
+            otherCustomer.style.display = "none";
+            otherCustomer.removeAttribute("name");
+
+        }
+
+    });
+
+    // Other Product textbox
+
+    document.addEventListener("change", function (e) {
+
+        if (e.target.classList.contains("product")) {
+
+            let row = e.target.closest("td");
+            let other = row.querySelector(".otherProduct");
+
+            if (e.target.value === "Others") {
+
+                other.style.display = "block";
+                other.setAttribute("name", "product[]");
+
+            } else {
+
+                other.style.display = "none";
+                other.removeAttribute("name");
+
+            }
+
+        }
+
+    });
+
+</script>
+
+{% endblock %}

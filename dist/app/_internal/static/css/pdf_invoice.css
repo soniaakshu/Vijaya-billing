@@ -1,0 +1,258 @@
+/* =====================================
+   PDF A4 LAYOUT
+===================================== */
+
+@page{
+    size:A4;
+    margin:8mm;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    color:#111;
+}
+
+body{
+    padding:0;
+}
+
+/* PAGE */
+
+.page-content{
+    width:100%;
+}
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    margin-bottom:8px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:5px;
+}
+
+.title h2{
+    margin:0;
+    font-size:20px;
+}
+
+.title-cell{
+    margin-top:2px;
+    font-size:12px;
+}
+
+/* HEADER */
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:8px;
+}
+
+.company{
+    width:68%;
+}
+
+.company h2{
+    margin:0;
+    color:#1e40af;
+    font-size:20px;
+}
+
+.company h4{
+    margin:3px 0;
+    font-size:13px;
+}
+
+.company p{
+    margin:0;
+    font-size:12px;
+    line-height:1.3;
+}
+
+.logo{
+    width:28%;
+    text-align:right;
+}
+
+.logo img{
+    width:90px;
+    height:auto;
+}
+
+.date-row{
+    margin-top:5px;
+    font-size:12px;
+    white-space:nowrap;
+}
+
+hr{
+    margin:8px 0;
+}
+
+/* DETAILS */
+
+.invoice-info{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 12px;
+    border:1px solid #bbb;
+    padding:8px;
+    margin-bottom:10px;
+}
+
+.bill-label,
+.customer,
+.product,
+.daterange{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.billno{
+    color:#d00000;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    table-layout:fixed;
+    page-break-inside:auto;
+}
+
+thead{
+    display:table-header-group;
+}
+
+tr{
+    page-break-inside:avoid;
+}
+
+th{
+    border:1px solid #000;
+    background:#1e40af;
+    color:#fff;
+    font-size:9px;
+    padding:4px 2px;
+    text-align:center;
+}
+
+td{
+    border:1px solid #000;
+    font-size:9px;
+    padding:3px 2px;
+    text-align:center;
+    word-break:break-word;
+}
+
+/* COLUMN WIDTHS */
+
+th:nth-child(1),
+td:nth-child(1){
+    width:4%;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+    width:10%;
+}
+
+th:nth-child(3),
+td:nth-child(3){
+    width:20%;
+}
+
+th:nth-child(4),
+td:nth-child(4),
+th:nth-child(5),
+td:nth-child(5),
+th:nth-child(6),
+td:nth-child(6),
+th:nth-child(7),
+td:nth-child(7),
+th:nth-child(8),
+td:nth-child(8),
+th:nth-child(9),
+td:nth-child(9),
+th:nth-child(10),
+td:nth-child(10),
+th:nth-child(11),
+td:nth-child(11){
+    width:8%;
+}
+
+/* GRAND TOTAL */
+
+.grand-box{
+    width:220px;
+    margin-top:12px;
+    margin-left:auto;
+    border:1px solid #000;
+    padding:8px;
+    text-align:right;
+}
+
+.grand-title{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.grand-amount{
+    font-size:18px;
+    color:#d00000;
+    font-weight:bold;
+}
+
+/* SIGNATURE */
+
+.signature{
+    margin-top:25px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-end;
+}
+
+.sign-text{
+    font-size:14px;
+    font-weight:bold;
+    margin-right:8px;
+}
+
+.sign-line-wrapper{
+    position:relative;
+    width:150px;
+    height:30px;
+    border-bottom:1px solid #000;
+}
+
+.signature img{
+    position:absolute;
+    left:50%;
+    bottom:-18px;
+    transform:translateX(-50%);
+    width:150px;
+    height:auto;
+}
+
+/* PRINT */
+
+@media print{
+
+    body{
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Padmavathi Invoice PDF</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static',
+                           filename='css/pdf_invoice.css',
+                           _external=True) }}">
+</head>
+
+<body>
+
+<div class="page-content">
+
+    <!-- TITLE SECTION -->
+    <div class="title">
+        <h2>Invoice / Credit</h2>
+
+        <div class="title-cell">
+            Cell : 9248933593, 9030812416
+        </div>
+    </div>
+
+    <!-- HEADER SECTION -->
+    <div class="header">
+
+        <div class="company">
+
+            <h2>PADMAVATHI DAIRY PRODUCTS</h2>
+
+            <h4><b>Dealers : TELANGANA VIJAYA DAIRY</b></h4>
+
+            <p>
+                <b>GSTIN : 36SIPK5952J1ZA</b><br>
+                <b>Plot No. 46, Manipuri Colony, Saroornagar</b><br>
+                <b>Hyderabad - 500035</b>
+            </p>
+
+        </div>
+
+        <div class="logo">
+
+            <img src="{{ url_for('static',
+                                 filename='images/logo.png',
+                                 _external=True) }}"
+                 alt="Vijaya Dairy Logo">
+
+            <div class="date-row">
+
+                <b>Date :</b>
+
+                <span>{{ invoice.from_date }}</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- INVOICE DETAILS -->
+
+    <div class="invoice-info">
+
+        <div class="bill-label">
+
+            Bill No :
+            <span class="billno">{{ invoice.bill_no }}</span>
+
+        </div>
+
+        <div class="daterange">
+
+            Date Range :
+            <span>{{ invoice.from_date }} to {{ invoice.to_date }}</span>
+
+        </div>
+
+        <div class="customer">
+
+            Customer :
+            <span>{{ invoice.customer }}</span>
+
+        </div>
+
+        <div class="product">
+
+            Product :
+            <span>Milk &amp; Milk Products</span>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <table>
+
+        <thead>
+
+        <tr>
+            <th rowspan="2">S.No</th>
+            <th rowspan="2">Date</th>
+            <th rowspan="2">Product</th>
+            <th rowspan="2">Price</th>
+            <th rowspan="2">Qty</th>
+            <th rowspan="2">Actual Amt</th>
+            <th colspan="2">CGST</th>
+            <th colspan="2">SGST</th>
+            <th rowspan="2">Total</th>
+        </tr>
+
+        <tr>
+            <th>%</th>
+            <th>Amt</th>
+            <th>%</th>
+            <th>Amt</th>
+        </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for item in invoice.items %}
+
+        <tr>
+
+            <td>{{ loop.index }}</td>
+
+            <td>{{ item.item_date }}</td>
+
+            <td>{{ item.product }}</td>
+
+            <td>{{ "%.2f"|format(item.price) }}</td>
+
+            <td>{{ "%.2f"|format(item.quantity) }}</td>
+
+            <td>{{ "%.2f"|format(item.actual_amount) }}</td>
+
+            <td>{{ "%.2f"|format(item.cgst) }}%</td>
+
+            <td>{{ "%.2f"|format(item.cgst_amount) }}</td>
+
+            <td>{{ "%.2f"|format(item.sgst) }}%</td>
+
+            <td>{{ "%.2f"|format(item.sgst_amount) }}</td>
+
+            <td>{{ "%.2f"|format(item.total) }}</td>
+
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <!-- GRAND TOTAL -->
+
+    <div class="grand-box">
+
+        <div class="grand-title">
+
+            Grand Total :
+
+            <span class="grand-amount">
+
+                ₹ {{ "%.2f"|format(invoice.grand_total) }}
+
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SIGNATURE -->
+
+<div class="signature">
+
+    <span class="sign-text">Signature:</span>
+
+    <div class="sign-line-wrapper">
+
+        <img src="{{ url_for('static',
+                             filename='images/Susignature.png',
+                             _external=True) }}"
+             alt="Signature">
+
+    </div>
+
+</div>
+
+</body>
+</html>

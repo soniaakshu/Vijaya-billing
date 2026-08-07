@@ -1,0 +1,306 @@
+/* =====================================
+   GLOBAL PAGE & CONTAINER SETUP
+===================================== */
+@page {
+    size: A4;
+    margin: 0; /* Clear page margins to accurately align bottom elements */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    min-height: 297mm;
+    padding: 10mm 12mm 30mm 12mm; /* Reserve 30mm at bottom for signature */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #1e293b;
+    font-size: 17px;
+    line-height: 1.4;
+    background-color: #ffffff;
+}
+
+/* =====================================
+   TITLE SECTION
+===================================== */
+.title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.title-cell {
+    margin-top: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #475569;
+}
+
+/* =====================================
+   HEADER & LOGO AREA
+===================================== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+}
+
+.company {
+    width: 60%;
+}
+
+.company h2 {
+    margin: 0 0 4px 0;
+    color: #1e40af;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.company h4 {
+    margin: 2px 0 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.company p {
+    margin: 3px 0;
+    font-size: 18px;
+    color: #475569;
+}
+
+.logo {
+    width: 38%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* Larger Logo Size */
+.logo img {
+    width: 135px;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+/* Guarantees Date stays on one single horizontal line */
+.date-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    white-space: nowrap !important;
+    font-size: 18px;
+    color: #0f172a;
+    gap: 6px;
+}
+
+hr {
+    margin: 14px 0 18px 0;
+    border: none;
+    border-top: 1px solid #cbd5e1;
+}
+
+/* =====================================
+   INVOICE DETAILS GRID
+===================================== */
+.invoice-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+        "bill   daterange"
+        "custom product";
+    gap: 12px 24px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 22px;
+}
+
+.bill-label, .billno { grid-area: bill; }
+.customer           { grid-area: custom; }
+.daterange          { grid-area: daterange; }
+.product            { grid-area: product; }
+
+.bill-label,
+.customer,
+.product,
+.daterange {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #475569;
+}
+
+.billno {
+    color: #dc2626;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.customer span,
+.product span,
+.daterange span {
+    font-weight: 700;
+    color: #0f172a;
+    font-size: 17px;
+}
+
+/* =====================================
+   TABLE
+===================================== */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+table th {
+    background-color: #1e40af;
+    color: #ffffff;
+    border-bottom: 1px solid #cbd5e1;
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table th:last-child {
+    border-right: none;
+}
+
+table td {
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-weight: 700; /* Ensures all current and future table data renders in bold */
+    color: #0f172a;   /* Crisp, high-contrast dark color */
+    text-align: center;
+    white-space: nowrap;
+}
+
+table td:last-child {
+    border-right: none;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+/* =====================================
+   GRAND TOTAL
+===================================== */
+.grand-box {
+    width: 300px;
+    margin-top: 18px;
+    margin-left: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 12px 18px;
+    text-align: right;
+    background: #f8fafc;
+}
+
+.grand-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #475569;
+    margin-bottom: 4px;
+}
+
+.grand-amount {
+    color: #dc2626;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+/* =====================================
+   SIGNATURE (PINNED TO BOTTOM)
+===================================== */
+.signature {
+    position: absolute;
+    bottom: 12mm;
+    right: 12mm;
+    display: flex;
+    align-items: flex-end;
+}
+
+.sign-text {
+    font-size: 22px;
+    font-weight: 700;
+    color: #475569;
+    margin-right: 12px;
+    padding-bottom: 4px;
+}
+
+.sign-line-wrapper {
+    position: relative;
+    width: 220px;
+    height: 40px;
+    border-bottom: 1.5px solid #0f172a;
+}
+
+.signature img {
+    position: absolute;
+    left: 50%;
+    bottom: -45px;
+    transform: translateX(-50%);
+    width: 260px;
+    height: auto;
+}
+
+/* =====================================
+   PRINT MEDIA RULES
+===================================== */
+@media print {
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .signature {
+        position: absolute;
+        bottom: 12mm;
+        right: 12mm;
+    }
+
+    table {
+        page-break-inside: auto;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+}

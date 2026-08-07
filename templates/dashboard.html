@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1 class="fw-bold">
+            🥛 VIJAYA DAIRY BILLING SYSTEM
+        </h1>
+
+        <p class="lead">
+            Select a Billing System
+        </p>
+
+    </div>
+
+    <div class="row justify-content-center">
+
+        <!-- K.S PRAKASH -->
+
+        <div class="col-md-5 mb-4">
+
+            <div class="card shadow-lg border-primary h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <h3 class="text-primary fw-bold">
+                        K.S. PRAKASH MILK POINT
+                    </h3>
+
+                    <hr>
+
+                    <h5>
+                        Dealers : TELANGANA VIJAYA DAIRY
+                    </h5>
+
+                    <p class="text-muted">
+                        Existing Billing System
+                    </p>
+
+                    <br>
+
+                    <a href="{{ url_for('new_invoice') }}"
+                       class="btn btn-primary btn-lg">
+
+                        Open Billing
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PADMAVATHI -->
+
+        <div class="col-md-5 mb-4">
+
+            <div class="card shadow-lg border-success h-100">
+
+                <div class="card-body text-center p-5">
+
+                    <h3 class="text-success fw-bold">
+                        PADMAVATHI DAIRY PRODUCTS
+                    </h3>
+
+                    <hr>
+
+                    <h5>
+                        Dealers : TELANGANA VIJAYA DAIRY
+                    </h5>
+
+                    <p class="text-muted">
+                        Golconda Billing System
+                    </p>
+
+                    <br>
+
+                    <a href="{{ url_for('padmavathi_invoice') }}"
+                       class="btn btn-success btn-lg">
+
+                        Open Billing
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
