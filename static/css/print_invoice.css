@@ -133,7 +133,7 @@ hr {
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    padding: 8px 14px; /* Reduced inner padding */
+    padding: 10px 15px; /* Reduced inner padding */
     margin-bottom: 14px; /* Reduced bottom gap before table */
 }
 
@@ -172,7 +172,7 @@ hr {
 table {
     width: 100%; /* Spans full width of body container to stay centered */
     margin-top: 8px;
-    margin-left: 0;
+    margin-left:-3px;
     margin-right: 0;
 
     border-collapse: separate;
