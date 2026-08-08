@@ -387,35 +387,60 @@ readonly>
 
     // Current Date
 
-    let today = new Date();
-
-    let day = String(today.getDate()).padStart(2, '0');
-    let month = String(today.getMonth() + 1).padStart(2, '0');
-    let year = today.getFullYear();
-
-    document.getElementById("currentDate").innerHTML =
-        day + "-" + month + "-" + year;
-
-    // Other Customer textbox
-
-    const customer = document.getElementById("customer");
-    const otherCustomer = document.getElementById("otherCustomer");
-
-    customer.addEventListener("change", function () {
-
-        if (this.value === "Others") {
-
-            otherCustomer.style.display = "block";
-            otherCustomer.setAttribute("name", "customer");
-
-        } else {
-
-            otherCustomer.style.display = "none";
-            otherCustomer.removeAttribute("name");
-
-        }
-
-    });
+            // Invoice Date
+        // Default = last day of the current month
+        
+        const invoiceDateInput =
+            document.getElementById("invoiceDate");
+        
+        const today = new Date();
+        
+        const lastDayOfCurrentMonth =
+            new Date(
+                today.getFullYear(),
+                today.getMonth() + 1,
+                0
+            );
+        
+        const invoiceYear =
+            lastDayOfCurrentMonth.getFullYear();
+        
+        const invoiceMonth =
+            String(
+                lastDayOfCurrentMonth.getMonth() + 1
+            ).padStart(2, "0");
+        
+        const invoiceDay =
+            String(
+                lastDayOfCurrentMonth.getDate()
+            ).padStart(2, "0");
+        
+        invoiceDateInput.value =
+            invoiceYear +
+            "-" +
+            invoiceMonth +
+            "-" +
+            invoiceDay;
+            // Other Customer textbox
+        
+            const customer = document.getElementById("customer");
+            const otherCustomer = document.getElementById("otherCustomer");
+        
+            customer.addEventListener("change", function () {
+        
+                if (this.value === "Others") {
+        
+                    otherCustomer.style.display = "block";
+                    otherCustomer.setAttribute("name", "customer");
+        
+                } else {
+        
+                    otherCustomer.style.display = "none";
+                    otherCustomer.removeAttribute("name");
+        
+                }
+        
+            });
 
     // Other Product textbox
 
