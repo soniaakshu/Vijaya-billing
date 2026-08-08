@@ -4,19 +4,28 @@ from flask import (
     request,
     redirect,
     url_for,
-    make_response
+    make_response,
+    session
 )
 
 from models import db, Invoice, InvoiceItem
 
 import pdfkit
 import os
+import hmac
 import sys
 import shutil
 import threading
 import webbrowser
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = os.environ.get(
+    "SECRET_KEY",
+    "temporary-development-key"
+)
+
+ADMIN_USERNAME = os.environ.get("ADMIN_USERNAME")
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 
 # --------------------------------------------------
 # Base Directory
@@ -93,7 +102,61 @@ with app.app_context():
             print("Database migration message:", e)
 
     print("Database Ready.")
+# --------------------------------------------------
+# LOGIN
+# --------------------------------------------------
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if request.method == "POST":
+
+        username = request.form.get("username", "")
+        password = request.form.get("password", "")
+
+        if (
+            ADMIN_USERNAME
+            and ADMIN_PASSWORD
+            and hmac.compare_digest(username, ADMIN_USERNAME)
+            and hmac.compare_digest(password, ADMIN_PASSWORD)
+        ):
+            session["logged_in"] = True
+
+            return redirect(url_for("dashboard"))
+
+        return render_template(
+            "login.html",
+            error="Invalid username or password"
+        )
+
+    return render_template("login.html")
+
+
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    return redirect(url_for("login"))
+
+
+# --------------------------------------------------
+# PROTECT WEBSITE
+# --------------------------------------------------
+
+@app.before_request
+def require_login():
+
+    allowed_routes = {
+        "login",
+        "static"
+    }
+
+    if request.endpoint in allowed_routes:
+        return
+
+    if not session.get("logged_in"):
+        return redirect(url_for("login"))
 # --------------------------------------------------
 # Dashboard
 # --------------------------------------------------
