@@ -13,8 +13,10 @@ class Invoice(db.Model):
     customer = db.Column(db.String(200), nullable=False)
     company = db.Column(db.String(30), nullable=False)
 
-    from_date = db.Column(db.String(20))
+    invoice_date = db.Column(db.String(20))
 
+    from_date = db.Column(db.String(20))
+    
     to_date = db.Column(db.String(20))
 
     grand_total = db.Column(db.Float, default=0)
