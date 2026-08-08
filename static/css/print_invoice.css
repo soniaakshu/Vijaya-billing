@@ -223,33 +223,36 @@ table tbody tr:nth-child(even) {
    GRAND TOTAL
 ===================================== */
 .grand-box {
-    width: 110px; /* Sized to match the last column width */
+    width: auto;             /* Fits content naturally without overflow */
+    min-width: 130px;        /* Ensures proper sizing under the last column */
+    display: inline-block;
+    float: right;            /* Keeps it right-aligned with the table edge */
     margin-top: 12px;
-    margin-left: auto;
-    margin-right: 0; /* Aligns perfectly to the right edge with the table */
+    margin-right: 0;
 
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    padding: 10px 8px;
+    padding: 8px 12px;
 
-    text-align: center; /* Centers text directly below TOTAL column */
+    text-align: right;
     background: #f8fafc;
     box-sizing: border-box;
+    white-space: nowrap;     /* Prevents wrapping while keeping text inside */
 }
 
 .grand-title {
-    font-size: 13px;
+    display: inline;
+    font-size: 14px;
     font-weight: 800;
     color: #475569;
-    margin-bottom: 4px;
-    white-space: nowrap;
 }
 
 .grand-amount {
+    display: inline;
     color: #dc2626;
     font-size: 18px;
     font-weight: 700;
-    white-space: nowrap;
+    margin-left: 4px;
 }
 /* =====================================
    SIGNATURE (PINNED TO BOTTOM)
