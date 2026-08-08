@@ -109,7 +109,9 @@
                 {% for item in invoice.items %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ item.item_date }}</td>
+                    <td>
+                        {{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}
+                    </td>
                     <td>{{ item.product }}</td>
                     <td>{{ "%.2f"|format(item.price) }}</td>
                     <td>{{ "%.2f"|format(item.quantity) }}</td>
