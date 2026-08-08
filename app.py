@@ -295,8 +295,7 @@ def save_invoice():
     from_date = request.form.get("from_date")
     to_date = request.form.get("to_date")
     # ---------------- Create Invoice ----------------
-
-   invoice = Invoice(
+    invoice = Invoice(
         bill_no=bill_no,
         customer=customer,
         company=company,
