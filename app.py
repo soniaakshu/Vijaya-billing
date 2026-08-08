@@ -269,20 +269,20 @@ def save_invoice():
 
     bill_no = request.form.get("bill_no")
     customer = request.form.get("customer")
+    invoice_date = request.form.get("invoice_date")
     from_date = request.form.get("from_date")
     to_date = request.form.get("to_date")
-
     # ---------------- Create Invoice ----------------
 
-    invoice = Invoice(
+   invoice = Invoice(
         bill_no=bill_no,
         customer=customer,
         company=company,
+        invoice_date=invoice_date,
         from_date=from_date,
         to_date=to_date,
         grand_total=0
     )
-
     db.session.add(invoice)
     db.session.commit()
 
