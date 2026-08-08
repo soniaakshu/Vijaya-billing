@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vijaya Billing - Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+        }
+
+        .login-box {
+            width: 380px;
+            padding: 35px;
+
+            background: white;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 8px 30px rgba(0, 0, 0, 0.12);
+
+            text-align: center;
+        }
+
+        .login-box img {
+            width: 110px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            margin: 5px 0 8px;
+            color: #1e40af;
+        }
+
+        .subtitle {
+            margin-bottom: 25px;
+            color: #64748b;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+
+            margin-top: 15px;
+            margin-bottom: 6px;
+
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+
+            margin-top: 25px;
+            padding: 13px;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 17px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .error {
+            margin-top: 15px;
+
+            padding: 10px;
+
+            background: #fee2e2;
+            color: #b91c1c;
+
+            border-radius: 6px;
+
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="Vijaya Dairy"
+        >
+
+        <h1>Vijaya Billing</h1>
+
+        <div class="subtitle">
+            Authorized Access Only
+        </div>
+
+        <form method="POST">
+
+            <label for="username">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                autocomplete="username"
+            >
+
+            <label for="password">
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                autocomplete="current-password"
+            >
+
+            <button type="submit">
+                LOGIN
+            </button>
+
+        </form>
+
+        {% if error %}
+        <div class="error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
