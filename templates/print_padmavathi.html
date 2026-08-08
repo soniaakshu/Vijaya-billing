@@ -48,11 +48,10 @@
         <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vijaya Dairy Logo">
 
         <div class="date-row">
-
             <b>Date :</b>
-
-            <span>{{ invoice.from_date }}</span>
-
+            <span>
+                {{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}
+            </span>
         </div>
 
     </div>
@@ -67,8 +66,13 @@
                 Bill No : <span class="billno">{{ invoice.bill_no }}</span>
             </div>
 
-            <div class="daterange">
-                Date Range : <span>{{ invoice.from_date }} to {{ invoice.to_date }}</span>
+           <div class="daterange">
+                Date Range :
+                <span>
+                    {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
+                    to
+                    {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
+                </span>
             </div>
 
             <div class="customer">
