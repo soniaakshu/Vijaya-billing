@@ -170,13 +170,13 @@ hr {
    TABLE
 ===================================== */
 table {
-    width: 100%;
-    box-sizing: border-box;
+    width: calc(100% - 36px);
+    margin-top: 8px;
+    margin-left: 18px;
+    margin-right: 18px;
+
     border-collapse: separate;
     border-spacing: 0;
-    margin-top: 8px;
-    margin-left: 0;
-    margin-right: 0;
     border: 1px solid #cbd5e1;
     border-radius: 6px;
     overflow: hidden;
