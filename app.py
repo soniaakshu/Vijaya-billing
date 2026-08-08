@@ -8,7 +8,8 @@ from flask import (
     session
 )
 
-from models import db, Invoice, InvoiceItem
+from models import db, Invoice, InvoiceItem, Admin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 import pdfkit
 import os
@@ -79,6 +80,24 @@ print("=" * 60)
 
 with app.app_context():
     db.create_all()
+        # Create first admin account if none exists
+    if Admin.query.count() == 0:
+
+        username = os.environ.get("ADMIN_USERNAME")
+        password = os.environ.get("ADMIN_PASSWORD")
+
+        if username and password:
+
+            admin = Admin(
+                username=username,
+                password_hash=generate_password_hash(password)
+            )
+
+            db.session.add(admin)
+            db.session.commit()
+
+            print("First admin account created.")
+    
 
     # Add invoice_date to existing databases if it does not exist
     from sqlalchemy import text
@@ -106,23 +125,32 @@ with app.app_context():
 # LOGIN
 # --------------------------------------------------
 
+# --------------------------------------------------
+# LOGIN
+# --------------------------------------------------
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
     if request.method == "POST":
 
-        username = request.form.get("username", "")
+        username = request.form.get("username", "").strip()
         password = request.form.get("password", "")
 
-        if (
-            ADMIN_USERNAME
-            and ADMIN_PASSWORD
-            and hmac.compare_digest(username, ADMIN_USERNAME)
-            and hmac.compare_digest(password, ADMIN_PASSWORD)
+        admin = Admin.query.filter_by(
+            username=username
+        ).first()
+
+        if admin and check_password_hash(
+            admin.password_hash,
+            password
         ):
+            session["admin_id"] = admin.id
             session["logged_in"] = True
 
-            return redirect(url_for("dashboard"))
+            return redirect(
+                url_for("dashboard")
+            )
 
         return render_template(
             "login.html",
@@ -132,14 +160,39 @@ def login():
     return render_template("login.html")
 
 
+# --------------------------------------------------
+# LOGOUT
+# --------------------------------------------------
+
 @app.route("/logout")
 def logout():
 
     session.clear()
 
-    return redirect(url_for("login"))
+    return redirect(
+        url_for("login")
+    )
 
 
+# --------------------------------------------------
+# PROTECT WEBSITE
+# --------------------------------------------------
+
+@app.before_request
+def require_login():
+
+    allowed_routes = {
+        "login",
+        "static"
+    }
+
+    if request.endpoint in allowed_routes:
+        return
+
+    if not session.get("logged_in"):
+        return redirect(
+            url_for("login")
+        )
 # --------------------------------------------------
 # PROTECT WEBSITE
 # --------------------------------------------------
