@@ -119,22 +119,22 @@ hr {
     border: none;
     border-top: 1px solid #cbd5e1;
 }
-
 /* =====================================
-   INVOICE DETAILS GRID
+   INVOICE DETAILS GRID (COMPACT FIX)
 ===================================== */
 .invoice-info {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /* Adjusts grid so left side gets more width, preventing Date Range from wrapping */
+    grid-template-columns: 1.1fr 1.3fr; 
     grid-template-areas: 
-        "bill   daterange"
+        "bill    daterange"
         "custom product";
-    gap: 12px 24px;
+    gap: 6px 16px; /* Reduced vertical and horizontal spacing */
     background-color: #f8fafc;
     border: 1px solid #e2e8f0;
     border-radius: 6px;
-    padding: 14px 18px;
-    margin-bottom: 22px;
+    padding: 8px 14px; /* Reduced inner padding */
+    margin-bottom: 14px; /* Reduced bottom gap before table */
 }
 
 .bill-label, .billno { grid-area: bill; }
@@ -147,14 +147,15 @@ hr {
 .product,
 .daterange {
     margin: 0;
-    font-size: 18px;
+    font-size: 15px; /* Slightly reduced font size to fit cleanly */
     font-weight: 800;
     color: #475569;
+    white-space: nowrap; /* Forces date range & customer info onto one line */
 }
 
 .billno {
     color: #dc2626;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
 }
 
@@ -163,9 +164,8 @@ hr {
 .daterange span {
     font-weight: 700;
     color: #0f172a;
-    font-size: 17px;
+    font-size: 15px;
 }
-
 /* =====================================
    TABLE
 ===================================== */
