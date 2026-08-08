@@ -173,7 +173,85 @@ def logout():
         url_for("login")
     )
 
+# --------------------------------------------------
+# CHANGE PASSWORD
+# --------------------------------------------------
 
+@app.route("/change-password", methods=["GET", "POST"])
+def change_password():
+
+    if not session.get("logged_in"):
+        return redirect(
+            url_for("login")
+        )
+
+    admin_id = session.get("admin_id")
+
+    admin = Admin.query.get(admin_id)
+
+    if admin is None:
+        session.clear()
+
+        return redirect(
+            url_for("login")
+        )
+
+    if request.method == "POST":
+
+        current_password = request.form.get(
+            "current_password",
+            ""
+        )
+
+        new_password = request.form.get(
+            "new_password",
+            ""
+        )
+
+        confirm_password = request.form.get(
+            "confirm_password",
+            ""
+        )
+
+        # Check current password
+        if not check_password_hash(
+            admin.password_hash,
+            current_password
+        ):
+            return render_template(
+                "change_password.html",
+                error="Current password is incorrect."
+            )
+
+        # Check minimum password length
+        if len(new_password) < 8:
+            return render_template(
+                "change_password.html",
+                error="New password must be at least 8 characters."
+            )
+
+        # Check confirmation
+        if new_password != confirm_password:
+            return render_template(
+                "change_password.html",
+                error="New passwords do not match."
+            )
+
+        # Save new password securely
+        admin.password_hash = generate_password_hash(
+            new_password
+        )
+
+        db.session.commit()
+
+        return render_template(
+            "change_password.html",
+            success="Password changed successfully."
+        )
+
+    return render_template(
+        "change_password.html"
+    )
 # --------------------------------------------------
 # PROTECT WEBSITE
 # --------------------------------------------------
