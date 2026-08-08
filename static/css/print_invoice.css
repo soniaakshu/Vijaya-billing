@@ -167,14 +167,13 @@ hr {
 }
 
 /* =====================================
-TABLE
+   TABLE
 ===================================== */
-
 table {
-    width: calc(100% - 24px);
+    width: 100%; /* Spans full width of body container to stay centered */
     margin-top: 8px;
-    margin-left: 12px;
-    margin-right: 12px;
+    margin-left: 0;
+    margin-right: 0;
 
     border-collapse: separate;
     border-spacing: 0;
@@ -219,37 +218,39 @@ table tbody tr:last-child td {
 table tbody tr:nth-child(even) {
     background-color: #f8fafc;
 }
+
 /* =====================================
    GRAND TOTAL
 ===================================== */
 .grand-box {
-    width: 180px;
+    width: 110px; /* Sized to match the last column width */
     margin-top: 12px;
     margin-left: auto;
-    margin-right: 12px;
+    margin-right: 0; /* Aligns perfectly to the right edge with the table */
 
     border: 1px solid #cbd5e1;
     border-radius: 6px;
-    padding: 10px 14px;
+    padding: 10px 8px;
 
-    text-align: right;
+    text-align: center; /* Centers text directly below TOTAL column */
     background: #f8fafc;
     box-sizing: border-box;
 }
 
 .grand-title {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 800;
     color: #475569;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    white-space: nowrap;
 }
 
 .grand-amount {
     color: #dc2626;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
+    white-space: nowrap;
 }
-
 /* =====================================
    SIGNATURE (PINNED TO BOTTOM)
 ===================================== */
