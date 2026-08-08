@@ -70,6 +70,28 @@ print("=" * 60)
 
 with app.app_context():
     db.create_all()
+
+    # Add invoice_date to existing databases if it does not exist
+    from sqlalchemy import text
+
+    try:
+        db.session.execute(
+            text(
+                "ALTER TABLE invoices "
+                "ADD COLUMN invoice_date VARCHAR(20)"
+            )
+        )
+        db.session.commit()
+        print("Added invoice_date column.")
+    except Exception as e:
+        db.session.rollback()
+
+        # Column already exists - nothing to do
+        if "duplicate column name" in str(e).lower():
+            print("invoice_date column already exists.")
+        else:
+            print("Database migration message:", e)
+
     print("Database Ready.")
 
 # --------------------------------------------------
