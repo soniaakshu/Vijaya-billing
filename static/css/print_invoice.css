@@ -129,13 +129,13 @@ table.data-table th {
 /* Signature Layout Fix */
 .signature-container { 
   position: absolute;
-  bottom: 80px;
-  right: 25px;
+  bottom: 12mm;
+  right: 12mm;
   display: flex; 
   align-items: flex-end; 
 }
 .signature-title { 
-  font-size: 18px; 
+  font-size: 22px; 
   font-weight: bold; 
   margin-right: 12px; 
   padding-bottom: 2px;
@@ -151,7 +151,7 @@ table.data-table th {
   max-height: 120px; /* Larger signature size */
   width: auto; 
   position: absolute;
-  bottom: -20px; /* Lays directly on the black line */
+  bottom: -45px; /* Lays directly on the black line */
   right: 30px;
 }
 
