@@ -3,71 +3,72 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+    <title>Invoice - K.S. Prakash Milk Point</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/print_invoice.css') }}">
 </head>
 
 <body onload="window.print()">
 
-    <div class="page-content">
+    <div class="invoice-card">
 
-        <!-- TITLE SECTION -->
-        <div class="title-header">
-            <h2>Invoice/Credit</h2>
-            <p>CELL : 9248933593, 9030812416</p>
+        <!-- TOP TITLE SECTION -->
+        <div class="top-header-center">
+            <div class="top-header-title">Invoice/Credit</div>
+            <div class="top-header-cell">CELL : 9248933593, 9030812416</div>
         </div>
 
-        <!-- HEADER SECTION -->
-        <div class="header">
-            <div class="company">
-                <h2>K.S. PRAKASH MILK POINT</h2>
-                <p class="dealers">Dealers: TELANGANA VIJAYA DAIRY.</p>
-                <p>
-                    <b>GSTIN: 36GZMPK3706G1Z6</b><br>
-                    Venkateshwara Colony, Saroornagar<br>
-                    Hyderabad - 500035
-                </p>
-            </div>
-
-            <div class="logo-section">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vijaya Dairy Logo">
-                <div class="date-row">
-                    <b>Date: </b>
-                    <span>{{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}</span>
-                </div>
-            </div>
-        </div>
+        <!-- BUSINESS HEADER SECTION -->
+        <table class="header-table">
+            <tr>
+                <td style="text-align: left; vertical-align: top;">
+                    <div class="business-title">K.S. PRAKASH MILK POINT</div>
+                    <div class="business-info"><b>Dealers: TELANGANA VIJAYA DAIRY.</b></div>
+                    <div class="business-info" style="margin-top: 6px;">
+                        <b>GSTIN: 36GZMPK3706G1Z6</b><br>
+                        Venkateshwara Colony, Saroornagar<br>
+                        Hyderabad - 500035
+                    </div>
+                </td>
+                <td style="text-align: right; vertical-align: top;">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo-img" alt="Vijaya Dairy Logo">
+                    <div class="date-row">
+                        <b>Date: </b>
+                        <span>{{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <!-- INVOICE DETAILS SECTION -->
-        <div class="invoice-info">
-            <p><b>Bill No:</b> <span class="billno">{{ invoice.bill_no }}</span></p>
-            <p><b>Customer:</b> <span>{{ invoice.customer }}</span></p>
-            <p><b>Product:</b> <span>Milk &amp; Milk Products</span></p>
-            <p>
+        <div class="bill-info">
+            <div><b>Bill No:</b> <span>{{ invoice.bill_no }}</span></div>
+            <div><b>Customer:</b> <span>{{ invoice.customer }}</span></div>
+            <div><b>Product:</b> <span>Milk &amp; Milk Products</span></div>
+            <div>
                 <b>Date Range:</b> 
                 <span>
                     {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
                     to
                     {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
                 </span>
-            </p>
+            </div>
         </div>
 
-        <!-- TABLE SECTION -->
-        <table>
+        <!-- ITEMS TABLE SECTION -->
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th rowspan="2">S.No</th>
-                    <th rowspan="2">Date</th>
-                    <th rowspan="2">Product</th>
-                    <th rowspan="2">Price</th>
-                    <th rowspan="2">Qty</th>
-                    <th rowspan="2">Actual Amt</th>
-                    <th rowspan="2">CGST %</th>
-                    <th rowspan="2">CGST Amt</th>
-                    <th rowspan="2">SGST %</th>
-                    <th rowspan="2">SGST Amt</th>
-                    <th rowspan="2">Total Amt</th>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Actual Amt</th>
+                    <th>CGST %</th>
+                    <th>CGST Amt</th>
+                    <th>SGST %</th>
+                    <th>SGST Amt</th>
+                    <th>Total Amt</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,23 +91,18 @@
         </table>
 
         <!-- GRAND TOTAL SECTION -->
-        <div class="grand-wrapper">
-            <div class="grand-box">
-                <span class="grand-title">Grand Total :</span>
-                <span class="grand-amount">
-                    ₹ {{ "%.2f"|format(invoice.grand_total) }}
-                </span>
+        <div class="grand-total-container">
+            Grand Total : ₹ {{ "%.2f"|format(invoice.grand_total) }}
+        </div>
+
+        <!-- SIGNATURE SECTION -->
+        <div class="signature-container">
+            <span class="signature-title">Signature:</span>
+            <div class="sig-img-wrapper">
+                <img src="{{ url_for('static', filename='images/signature.png') }}" class="sig-img" alt="Signature">
             </div>
         </div>
 
-    </div>
-
-    <!-- SIGNATURE SECTION -->
-    <div class="signature">
-        <span class="sign-text">Signature:</span>
-        <div class="sign-line-wrapper">
-            <img src="{{ url_for('static', filename='images/signature.png') }}" alt="Signature">
-        </div>
     </div>
 
 </body>
