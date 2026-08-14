@@ -23,10 +23,10 @@
                 <td style="text-align: left; vertical-align: top;">
                     <div class="business-title">K.S. PRAKASH MILK POINT</div>
                     <div class="business-info"><b>Dealers: TELANGANA VIJAYA DAIRY.</b></div>
-                    <div class="business-info" style="margin-top: 6px;">
+                    <div class="business-info" style="margin-top: 4px;">
                         <b>GSTIN: 36GZMPK3706G1Z6</b><br>
-                        Venkateshwara Colony, Saroornagar<br>
-                        Hyderabad - 500035
+                        <span class="address-bold">Venkateshwara Colony, Saroornagar</span><br>
+                        <span class="address-bold">Hyderabad - 500035</span>
                     </div>
                 </td>
                 <td style="text-align: right; vertical-align: top;">
@@ -41,8 +41,8 @@
 
         <!-- INVOICE DETAILS SECTION -->
         <div class="bill-info">
-            <div><b>Bill No:</b> <span>{{ invoice.bill_no }}</span></div>
-            <div><b>Customer:</b> <span>{{ invoice.customer }}</span></div>
+            <div><b>Bill No:</b> <span class="bill-no-red">{{ invoice.bill_no }}</span></div>
+            <div><b>Customer:</b> <span class="customer-bold">{{ invoice.customer }}</span></div>
             <div><b>Product:</b> <span>Milk &amp; Milk Products</span></div>
             <div>
                 <b>Date Range:</b> 
@@ -90,9 +90,12 @@
             </tbody>
         </table>
 
-        <!-- GRAND TOTAL SECTION -->
-        <div class="grand-total-container">
-            Grand Total : ₹ {{ "%.2f"|format(invoice.grand_total) }}
+        <!-- GRAND TOTAL BOX SECTION -->
+        <div class="grand-total-wrapper">
+            <div class="grand-total-box">
+                <span class="grand-title">Grand Total :</span>
+                <span class="grand-amount-red">₹ {{ "%.2f"|format(invoice.grand_total) }}</span>
+            </div>
         </div>
 
         <!-- SIGNATURE SECTION -->
