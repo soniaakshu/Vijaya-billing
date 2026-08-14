@@ -1,147 +1,162 @@
-body {
-    font-family: Arial, sans-serif;
-    color: #000;
-    margin: 0;
-    padding: 20px;
-    font-size: 14px;
+body { 
+  font-family: Arial, sans-serif; 
+  margin: 0; 
+  padding: 20px; 
+  background: #fff; 
+  font-size: 14px; 
+  color: #000;
 }
 
-.page-content {
-    width: 100%;
+/* Page Card Container */
+.invoice-card { 
+  background: #fff; 
+  padding: 20px 25px; 
+  max-width: 850px; 
+  margin: auto; 
+  box-sizing: border-box;
+  position: relative;
+  min-height: 280mm;
 }
 
-/* Title Centered Top */
-.title-header {
-    text-align: center;
-    margin-bottom: 20px;
+/* Top Header (Title) */
+.top-header-center { 
+  text-align: center; 
+  margin-bottom: 25px; 
+}
+.top-header-title { 
+  font-size: 22px; 
+  font-weight: bold; 
+}
+.top-header-cell { 
+  font-size: 13px; 
+  font-weight: bold; 
+  margin-top: 3px; 
 }
 
-.title-header h2 {
-    margin: 0;
-    font-size: 20px;
-    font-weight: bold;
+/* Header Table Layout */
+.header-table { 
+  width: 100%; 
+  margin-bottom: 25px; 
+  border-collapse: collapse;
+}
+.business-title { 
+  font-weight: bold; 
+  font-size: 22px; 
+  color: #0d6efd; /* Same blue accent */
+  margin-bottom: 4px; 
+}
+.business-info { 
+  font-size: 14px; 
+  line-height: 1.4; 
 }
 
-.title-header p {
-    margin: 2px 0 0 0;
-    font-weight: bold;
-    font-size: 13px;
-}
-
-/* Header Flex Layout */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.company h2 {
-    color: #0d6efd; /* Blue color matching design */
-    margin: 0 0 5px 0;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.company .dealers {
-    font-weight: bold;
-    margin: 0 0 5px 0;
-}
-
-.company p {
-    margin: 0;
-    line-height: 1.4;
-}
-
-.logo-section {
-    text-align: right;
-}
-
-.logo-section img {
-    max-width: 90px;
-    height: auto;
-    margin-bottom: 15px;
+.logo-img { 
+  max-height: 75px; 
+  width: auto; 
+  margin-bottom: 10px;
 }
 
 .date-row {
-    font-size: 14px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
-/* Invoice Meta Info */
-.invoice-info {
-    margin-bottom: 20px;
-    line-height: 1.6;
+/* Bill Info Lines */
+.bill-info { 
+  margin-bottom: 20px; 
+  font-size: 14px; 
+  line-height: 1.6; 
 }
-
-.invoice-info p {
-    margin: 2px 0;
+.bill-info div {
+  margin-bottom: 2px;
 }
 
 /* Table Design */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
+table.data-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 10px; 
+  font-size: 13px; 
+}
+table.data-table th, table.data-table td { 
+  border: 1px solid #7d7d7d; 
+  padding: 6px 4px; 
+  text-align: center; 
+  line-height: 1.2;
+}
+table.data-table th { 
+  background-color: #f2f2f2; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 13px;
 }
 
-table, th, td {
-    border: 1px solid #333;
+/* Grand Total Alignment */
+.grand-total-container {
+  width: 100%;
+  text-align: right;
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
-th {
-    background-color: #0d6efd; /* Blue table header */
-    color: #fff;
-    padding: 8px 4px;
-    text-align: center;
-    font-size: 13px;
+/* Fixed Signature Line Layout */
+.signature-container { 
+  position: absolute;
+  bottom: 80px;
+  right: 25px;
+  display: flex; 
+  align-items: flex-end; 
+}
+.signature-title { 
+  font-size: 18px; 
+  font-weight: bold; 
+  margin-right: 15px; 
+  padding-bottom: 5px;
+}
+.sig-img-wrapper {
+  border-bottom: 2px solid #000;
+  width: 250px;
+  text-align: center;
+  position: relative;
+  height: 35px;
+}
+.sig-img { 
+  max-height: 65px; 
+  width: auto; 
+  position: absolute;
+  bottom: 2px;
+  right: 30px;
 }
 
-td {
-    padding: 6px 4px;
-    text-align: center;
-    font-size: 13px;
-}
-
-/* Grand Total Layout */
-.grand-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-}
-
-.grand-box {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.grand-amount {
-    margin-left: 10px;
-}
-
-/* Signature Layout */
-.signature {
-    margin-top: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.sign-text {
-    font-weight: bold;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.sign-line-wrapper {
-    border-bottom: 2px solid #000;
-    width: 250px;
+/* Print Specific Rules */
+@media print {
+  html, body { 
+    height: 100%;
+    background: white; 
+    margin: 0; 
+    padding: 0; 
+  }
+  .invoice-card { 
+    padding: 10px; 
+    width: 100%; 
+    max-width: 100%; 
+    min-height: 98vh;
     position: relative;
-    height: 40px;
-}
-
-.sign-line-wrapper img {
+  }
+  table.data-table th { 
+    background-color: #f2f2f2 !important; 
+    color: #000 !important; 
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+  }
+  .signature-container {
     position: absolute;
-    bottom: 5px;
-    right: 20px;
-    max-height: 60px;
+    bottom: 50px;
+    right: 15px;
+  }
+  @page { 
+    margin: 10mm; 
+    size: A4 portrait;
+  }
 }
