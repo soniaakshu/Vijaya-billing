@@ -1,309 +1,147 @@
-/* =====================================
-   GLOBAL PAGE & CONTAINER SETUP
-===================================== */
-@page {
-    size: A4;
-    margin: 0; /* Clear page margins to accurately align bottom elements */
-}
-
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 body {
-    position: relative;
-    min-height: 297mm;
-    padding: 10mm 12mm 30mm 12mm; /* Reserve 30mm at bottom for signature */
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    color: #1e293b;
-    font-size: 17px;
-    line-height: 1.4;
-    background-color: #ffffff;
-}
-
-/* =====================================
-   TITLE SECTION
-===================================== */
-.title {
-    text-align: center;
-    margin-top: 0;
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #e2e8f0;
-}
-
-.title h2 {
+    font-family: Arial, sans-serif;
+    color: #000;
     margin: 0;
-    font-size: 28px;
-    font-weight: 800;
-    color: #0f172a;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    padding: 20px;
+    font-size: 14px;
 }
 
-.title-cell {
-    margin-top: 4px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #475569;
+.page-content {
+    width: 100%;
 }
 
-/* =====================================
-   HEADER & LOGO AREA
-===================================== */
+/* Title Centered Top */
+.title-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.title-header p {
+    margin: 2px 0 0 0;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* Header Flex Layout */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 14px;
-}
-
-.company {
-    width: 60%;
+    margin-bottom: 20px;
 }
 
 .company h2 {
-    margin: 0 0 4px 0;
-    color: #1e40af;
-    font-size: 28px;
-    font-weight: 700;
+    color: #0d6efd; /* Blue color matching design */
+    margin: 0 0 5px 0;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.company h4 {
-    margin: 2px 0 6px 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #334155;
+.company .dealers {
+    font-weight: bold;
+    margin: 0 0 5px 0;
 }
 
 .company p {
-    margin: 3px 0;
-    font-size: 18px;
-    color: #475569;
-}
-
-.logo {
-    width: 38%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-/* Larger Logo Size */
-.logo img {
-    width: 135px;
-    height: auto;
-    object-fit: contain;
-    margin-bottom: 8px;
-}
-
-/* Guarantees Date stays on one single horizontal line */
-.date-row {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    white-space: nowrap !important;
-    font-size: 18px;
-    color: #0f172a;
-    gap: 6px;
-}
-
-hr {
-    margin: 14px 0 18px 0;
-    border: none;
-    border-top: 1px solid #cbd5e1;
-}
-/* =====================================
-   INVOICE DETAILS GRID (COMPACT FIX)
-===================================== */
-.invoice-info {
-    display: grid;
-    /* Adjusts grid so left side gets more width, preventing Date Range from wrapping */
-    grid-template-columns: 1.1fr 1.3fr; 
-    grid-template-areas: 
-        "bill    daterange"
-        "custom product";
-    gap: 6px 16px; /* Reduced vertical and horizontal spacing */
-    background-color: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    padding: 10px 15px; /* Reduced inner padding */
-    margin-bottom: 14px; /* Reduced bottom gap before table */
-}
-
-.bill-label, .billno { grid-area: bill; }
-.customer           { grid-area: custom; }
-.daterange          { grid-area: daterange; }
-.product            { grid-area: product; }
-
-.bill-label,
-.customer,
-.product,
-.daterange {
     margin: 0;
-    font-size: 15px; /* Slightly reduced font size to fit cleanly */
-    font-weight: 800;
-    color: #475569;
-    white-space: nowrap; /* Forces date range & customer info onto one line */
+    line-height: 1.4;
 }
 
-.billno {
-    color: #dc2626;
-    font-size: 15px;
-    font-weight: 700;
+.logo-section {
+    text-align: right;
 }
 
-.customer span,
-.product span,
-.daterange span {
-    font-weight: 700;
-    color: #0f172a;
-    font-size: 15px;
+.logo-section img {
+    max-width: 90px;
+    height: auto;
+    margin-bottom: 15px;
 }
-/* =====================================
-   TABLE
-===================================== */
+
+.date-row {
+    font-size: 14px;
+}
+
+/* Invoice Meta Info */
+.invoice-info {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.invoice-info p {
+    margin: 2px 0;
+}
+
+/* Table Design */
 table {
-    width: 100%; /* Spans full width of body container to stay centered */
-    margin-top: 8px;
-    margin-left:-3px;
-    margin-right: 0;
-
-    border-collapse: separate;
-    border-spacing: 0;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    overflow: hidden;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-table th {
-    background-color: #1e40af;
-    color: #ffffff;
-    border-bottom: 1px solid #cbd5e1;
-    border-right: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 10px 8px;
-    font-size: 14px;
-    font-weight: 800;
-    text-transform: uppercase;
+table, th, td {
+    border: 1px solid #333;
+}
+
+th {
+    background-color: #0d6efd; /* Blue table header */
+    color: #fff;
+    padding: 8px 4px;
     text-align: center;
-    white-space: nowrap;
+    font-size: 13px;
 }
 
-table td {
-    border-bottom: 1px solid #e2e8f0;
-    border-right: 1px solid #e2e8f0;
-    padding: 10px 8px;
-    font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
+td {
+    padding: 6px 4px;
     text-align: center;
-    white-space: nowrap;
+    font-size: 13px;
 }
 
-table th:last-child,
-table td:last-child {
-    border-right: none;
+/* Grand Total Layout */
+.grand-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
 }
 
-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-table tbody tr:nth-child(even) {
-    background-color: #f8fafc;
-}
-
-/* =====================================
-   GRAND TOTAL (CSS-ONLY FIX)
-===================================== */
 .grand-box {
-    display: block;          /* Allows margin-left: auto to push it to the right */
-    margin-top: 12px;
-    margin-left: auto;       /* Align flush to the right edge */
-    margin-right: 0;         /* Ensures zero gap on the right */
-    width: fit-content;      /* Shrinks the box tightly around the text */
-
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    padding: 8px 14px;
-    background: #f8fafc;
-    box-sizing: border-box;
-    white-space: nowrap;
-}
-
-.grand-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: #475569;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .grand-amount {
-    color: #dc2626;
-    font-size: 18px;
-    font-weight: 700;
-    margin-left: 4px;
+    margin-left: 10px;
 }
-/* =====================================
-   SIGNATURE (PINNED TO BOTTOM)
-===================================== */
+
+/* Signature Layout */
 .signature {
-    position: absolute;
-    bottom: 12mm;
-    right: 12mm;
+    margin-top: 50px;
     display: flex;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .sign-text {
-    font-size: 22px;
-    font-weight: 700;
-    color: #475569;
-    margin-right: 12px;
-    padding-bottom: 4px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
 .sign-line-wrapper {
+    border-bottom: 2px solid #000;
+    width: 250px;
     position: relative;
-    width: 220px;
     height: 40px;
-    border-bottom: 1.5px solid #0f172a;
 }
 
-.signature img {
+.sign-line-wrapper img {
     position: absolute;
-    left: 50%;
-    bottom: -45px;
-    transform: translateX(-50%);
-    width: 260px;
-    height: auto;
-}
-
-/* =====================================
-   PRINT MEDIA RULES
-===================================== */
-@media print {
-    body {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .signature {
-        position: absolute;
-        bottom: 12mm;
-        right: 12mm;
-    }
-
-    table {
-        page-break-inside: auto;
-    }
-
-    tr {
-        page-break-inside: avoid;
-    }
+    bottom: 5px;
+    right: 20px;
+    max-height: 60px;
 }
