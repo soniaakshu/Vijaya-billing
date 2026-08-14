@@ -148,10 +148,10 @@ table.data-table th {
   height: 25px;
 }
 .sig-img { 
-  max-height: 100px; /* Larger signature size */
+  max-height: 120px; /* Larger signature size */
   width: auto; 
   position: absolute;
-  bottom: -15px; /* Lays directly on the black line */
+  bottom: -20px; /* Lays directly on the black line */
   right: 30px;
 }
 
