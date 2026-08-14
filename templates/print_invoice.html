@@ -12,61 +12,45 @@
     <div class="page-content">
 
         <!-- TITLE SECTION -->
-        <div class="title">
-            <h2>Invoice / Credit</h2>
-            <div class="title-cell">
-                Cell : 9248933593, 9030812416
-            </div>
+        <div class="title-header">
+            <h2>Invoice/Credit</h2>
+            <p>CELL : 9248933593, 9030812416</p>
         </div>
 
         <!-- HEADER SECTION -->
         <div class="header">
             <div class="company">
                 <h2>K.S. PRAKASH MILK POINT</h2>
-                <h4><b>Dealers : TELANGANA VIJAYA DAIRY</b></h4>
+                <p class="dealers">Dealers: TELANGANA VIJAYA DAIRY.</p>
                 <p>
-                    <b>GSTIN : 36GZMPK3706G1Z6</b>
-                    <br><b>Venkateshwara Colony, Saroornagar</b><br>
-                    <b>Booth No. : 7687</b><br>
-                    <b>Hyderabad - 500035</b>
+                    <b>GSTIN: 36GZMPK3706G1Z6</b><br>
+                    Venkateshwara Colony, Saroornagar<br>
+                    Hyderabad - 500035
                 </p>
             </div>
 
-            <div class="logo">
+            <div class="logo-section">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vijaya Dairy Logo">
                 <div class="date-row">
-                    <b>Date :</b>
-                    <span>
-                        {{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}
-                    </span>
+                    <b>Date: </b>
+                    <span>{{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}</span>
                 </div>
             </div>
         </div>
 
-        <hr>
-
         <!-- INVOICE DETAILS SECTION -->
         <div class="invoice-info">
-            <div class="bill-label">
-                Bill No : <span class="billno">{{ invoice.bill_no }}</span>
-            </div>
-
-            <div class="daterange">
-                Date Range :
+            <p><b>Bill No:</b> <span class="billno">{{ invoice.bill_no }}</span></p>
+            <p><b>Customer:</b> <span>{{ invoice.customer }}</span></p>
+            <p><b>Product:</b> <span>Milk &amp; Milk Products</span></p>
+            <p>
+                <b>Date Range:</b> 
                 <span>
                     {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
                     to
                     {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
                 </span>
-            </div>
-
-            <div class="customer">
-                Customer : <span>{{ invoice.customer }}</span>
-            </div>
-
-            <div class="product">
-                Product : <span>Milk &amp; Milk Products</span>
-            </div>
+            </p>
         </div>
 
         <!-- TABLE SECTION -->
@@ -79,31 +63,25 @@
                     <th rowspan="2">Price</th>
                     <th rowspan="2">Qty</th>
                     <th rowspan="2">Actual Amt</th>
-                    <th colspan="2">CGST</th>
-                    <th colspan="2">SGST</th>
-                    <th rowspan="2">Total</th>
-                </tr>
-                <tr>
-                    <th>%</th>
-                    <th>Amt</th>
-                    <th>%</th>
-                    <th>Amt</th>
+                    <th rowspan="2">CGST %</th>
+                    <th rowspan="2">CGST Amt</th>
+                    <th rowspan="2">SGST %</th>
+                    <th rowspan="2">SGST Amt</th>
+                    <th rowspan="2">Total Amt</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in invoice.items %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>
-                        {{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}
-                    </td>
+                    <td>{{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}</td>
                     <td>{{ item.product }}</td>
                     <td>{{ "%.2f"|format(item.price) }}</td>
-                    <td>{{ "%.2f"|format(item.quantity) }}</td>
+                    <td>{{ "%.0f"|format(item.quantity) }}</td>
                     <td>{{ "%.2f"|format(item.actual_amount) }}</td>
-                    <td>{{ "%.2f"|format(item.cgst) }}%</td>
+                    <td>{{ "%.1f"|format(item.cgst) }}%</td>
                     <td>{{ "%.2f"|format(item.cgst_amount) }}</td>
-                    <td>{{ "%.2f"|format(item.sgst) }}%</td>
+                    <td>{{ "%.1f"|format(item.sgst) }}%</td>
                     <td>{{ "%.2f"|format(item.sgst_amount) }}</td>
                     <td>{{ "%.2f"|format(item.total) }}</td>
                 </tr>
@@ -111,7 +89,6 @@
             </tbody>
         </table>
 
-        <!-- GRAND TOTAL SECTION -->
         <!-- GRAND TOTAL SECTION -->
         <div class="grand-wrapper">
             <div class="grand-box">
@@ -124,7 +101,7 @@
 
     </div>
 
-    <!-- SIGNATURE SECTION (ANCHORED AT BOTTOM) -->
+    <!-- SIGNATURE SECTION -->
     <div class="signature">
         <span class="sign-text">Signature:</span>
         <div class="sign-line-wrapper">
