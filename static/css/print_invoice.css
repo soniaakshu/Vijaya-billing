@@ -24,11 +24,11 @@ body {
   margin-bottom: 20px; 
 }
 .top-header-title { 
-  font-size: 22px; 
+  font-size: 24px; 
   font-weight: bold; 
 }
 .top-header-cell { 
-  font-size: 13px; 
+  font-size: 15px; 
   font-weight: bold; 
   margin-top: 3px; 
 }
@@ -46,7 +46,7 @@ body {
   margin-bottom: 4px; 
 }
 .business-info { 
-  font-size: 14px; 
+  font-size: 16px; 
   line-height: 1.4; 
 }
 .address-bold {
@@ -68,7 +68,7 @@ body {
 /* Bill Info Styling */
 .bill-info { 
   margin-bottom: 20px; 
-  font-size: 14px; 
+  font-size: 16px; 
   line-height: 1.6; 
 }
 .bill-info div {
@@ -148,10 +148,10 @@ table.data-table th {
   height: 25px;
 }
 .sig-img { 
-  max-height: 85px; /* Larger signature size */
+  max-height: 100px; /* Larger signature size */
   width: auto; 
   position: absolute;
-  bottom: -8px; /* Lays directly on the black line */
+  bottom: -15px; /* Lays directly on the black line */
   right: 30px;
 }
 
