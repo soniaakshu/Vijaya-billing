@@ -18,10 +18,10 @@ body {
   min-height: 280mm;
 }
 
-/* Top Header (Title) */
+/* Top Header Title */
 .top-header-center { 
   text-align: center; 
-  margin-bottom: 25px; 
+  margin-bottom: 20px; 
 }
 .top-header-title { 
   font-size: 22px; 
@@ -33,27 +33,31 @@ body {
   margin-top: 3px; 
 }
 
-/* Header Table Layout */
+/* Business Header Table */
 .header-table { 
   width: 100%; 
-  margin-bottom: 25px; 
+  margin-bottom: 20px; 
   border-collapse: collapse;
 }
 .business-title { 
   font-weight: bold; 
   font-size: 22px; 
-  color: #0d6efd; /* Same blue accent */
+  color: #0d6efd; 
   margin-bottom: 4px; 
 }
 .business-info { 
   font-size: 14px; 
   line-height: 1.4; 
 }
+.address-bold {
+  font-weight: bold;
+}
 
+/* Logo Styling */
 .logo-img { 
-  max-height: 75px; 
+  max-height: 110px; /* Big Logo */
   width: auto; 
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .date-row {
@@ -61,46 +65,68 @@ body {
   font-weight: bold;
 }
 
-/* Bill Info Lines */
+/* Bill Info Styling */
 .bill-info { 
   margin-bottom: 20px; 
   font-size: 14px; 
   line-height: 1.6; 
 }
 .bill-info div {
-  margin-bottom: 2px;
+  margin-bottom: 3px;
+}
+.bill-no-red {
+  color: #d9534f;
+  font-weight: bold;
+}
+.customer-bold {
+  font-weight: bold;
 }
 
-/* Table Design */
+/* Data Table Styling */
 table.data-table { 
   width: 100%; 
   border-collapse: collapse; 
   margin-top: 10px; 
-  font-size: 13px; 
+  font-size: 13.5px; 
 }
 table.data-table th, table.data-table td { 
-  border: 1px solid #7d7d7d; 
+  border: 1px solid #444; 
   padding: 6px 4px; 
   text-align: center; 
   line-height: 1.2;
 }
 table.data-table th { 
-  background-color: #f2f2f2; 
-  color: #333; 
+  background-color: #0d6efd !important; /* Blue Header */
+  color: #ffffff !important; 
   font-weight: bold;
-  font-size: 13px;
+  font-size: 13.5px;
+  -webkit-print-color-adjust: exact; 
+  print-color-adjust: exact;
 }
 
-/* Grand Total Alignment */
-.grand-total-container {
-  width: 100%;
-  text-align: right;
+/* Grand Total Box Section */
+.grand-total-wrapper {
+  display: flex;
+  justify-content: flex-end;
   margin-top: 15px;
+}
+.grand-total-box {
+  border: 1.5px solid #333;
+  padding: 6px 16px;
   font-size: 18px;
   font-weight: bold;
+  background-color: #fff;
+  display: inline-block;
+}
+.grand-title {
+  margin-right: 8px;
+}
+.grand-amount-red {
+  color: #d9534f; /* Red Total */
+  font-weight: bold;
 }
 
-/* Fixed Signature Line Layout */
+/* Signature Layout Fix */
 .signature-container { 
   position: absolute;
   bottom: 80px;
@@ -111,25 +137,25 @@ table.data-table th {
 .signature-title { 
   font-size: 18px; 
   font-weight: bold; 
-  margin-right: 15px; 
-  padding-bottom: 5px;
+  margin-right: 12px; 
+  padding-bottom: 2px;
 }
 .sig-img-wrapper {
   border-bottom: 2px solid #000;
-  width: 250px;
+  width: 260px;
   text-align: center;
   position: relative;
-  height: 35px;
+  height: 25px;
 }
 .sig-img { 
-  max-height: 65px; 
+  max-height: 85px; /* Larger signature size */
   width: auto; 
   position: absolute;
-  bottom: 2px;
+  bottom: -8px; /* Lays directly on the black line */
   right: 30px;
 }
 
-/* Print Specific Rules */
+/* Print Rules */
 @media print {
   html, body { 
     height: 100%;
@@ -145,8 +171,8 @@ table.data-table th {
     position: relative;
   }
   table.data-table th { 
-    background-color: #f2f2f2 !important; 
-    color: #000 !important; 
+    background-color: #0d6efd !important; 
+    color: #ffffff !important; 
     -webkit-print-color-adjust: exact; 
     print-color-adjust: exact;
   }
