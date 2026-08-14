@@ -466,7 +466,7 @@ def delete_invoice(invoice_id):
         url_for("history")
     )
 # --------------------------------------------------
-# Save Invoice
+# Save Invoice (Updated to handle "Others" fields)
 # --------------------------------------------------
 
 @app.route("/save-invoice", methods=["POST"])
@@ -476,18 +476,27 @@ def save_invoice():
     company = request.form.get("company")
 
     print("=" * 50)
-    print(request.form)
+    print("Form Data:", request.form)
     print("Company =", repr(company))
     print("=" * 50)
 
     if company is None:
-        return "Company field is missing!"
+        return "Company field is missing!", 400
 
     bill_no = request.form.get("bill_no")
+    
+    # ---------------- Customer Field Handling ----------------
     customer = request.form.get("customer")
+    custom_customer = request.form.get("custom_customer", "").strip()
+    
+    # If "Others" is selected, fallback to the custom customer input box
+    if customer == "Others" and custom_customer:
+        customer = custom_customer
+
     invoice_date = request.form.get("invoice_date")
     from_date = request.form.get("from_date")
     to_date = request.form.get("to_date")
+
     # ---------------- Create Invoice ----------------
     invoice = Invoice(
         bill_no=bill_no,
@@ -501,10 +510,10 @@ def save_invoice():
     db.session.add(invoice)
     db.session.commit()
 
-    # ---------------- Product Details ----------------
-
+    # ---------------- Product Details Handling ----------------
     dates = request.form.getlist("item_date[]")
     products = request.form.getlist("product[]")
+    custom_products = request.form.getlist("custom_product[]")  # Reads custom typed products
     prices = request.form.getlist("price[]")
     qtys = request.form.getlist("qty[]")
 
@@ -522,72 +531,41 @@ def save_invoice():
 
     for i in range(len(products)):
 
+        # Handle "Others" for Product
+        prod_name = products[i]
+        if prod_name == "Others" and i < len(custom_products) and custom_products[i].strip():
+            prod_name = custom_products[i].strip()
+
         item = InvoiceItem(
-
             invoice_id=invoice.id,
-
-            item_date=dates[i],
-
-            product=products[i],
-
+            item_date=dates[i] if i < len(dates) else "",
+            product=prod_name,
             price=float(prices[i] or 0),
-
             quantity=float(qtys[i] or 0),
-
             actual_amount=float(actual_amounts[i] or 0),
-
             cgst=float(cgsts[i] or 0),
-
             cgst_amount=float(cgst_amounts[i] or 0),
-
             sgst=float(sgsts[i] or 0),
-
             sgst_amount=float(sgst_amounts[i] or 0),
-
             total=float(totals[i] or 0)
-
         )
 
         grand_total += float(totals[i] or 0)
-
         db.session.add(item)
 
     invoice.grand_total = grand_total
-
     db.session.commit()
 
     # ---------------- Actions ----------------
-
     if action == "print":
-
         if company == "padmavathi":
-
-            return redirect(
-                url_for(
-                    "print_padmavathi",
-                    invoice_id=invoice.id
-                )
-            )
-
-        return redirect(
-            url_for(
-                "print_invoice",
-                invoice_id=invoice.id
-            )
-        )
+            return redirect(url_for("print_padmavathi", invoice_id=invoice.id))
+        return redirect(url_for("print_invoice", invoice_id=invoice.id))
 
     elif action == "pdf":
+        return redirect(url_for("download_pdf", invoice_id=invoice.id))
 
-        return redirect(
-            url_for(
-                "download_pdf",
-                invoice_id=invoice.id
-            )
-        )
-
-    return redirect(
-        url_for("history")
-    )
+    return redirect(url_for("history"))
 # --------------------------------------------------
 # Run Application
 # --------------------------------------------------
