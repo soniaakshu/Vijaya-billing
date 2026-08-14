@@ -3,122 +3,86 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+    <title>Invoice - Padmavathi Dairy Products</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/print_invoice.css') }}">
 </head>
 
-{% if print_mode %}
 <body onload="window.print()">
-{% else %}
-<body>
-{% endif %}
 
-    <div class="page-content">
+    <div class="invoice-card">
 
-        <!-- TITLE SECTION -->
-        <div class="title">
-            <h2>Invoice / Credit</h2>
-            <div class="title-cell">
-                Cell : 9248933593, 9030812416
-            </div>
+        <!-- TOP TITLE SECTION -->
+        <div class="top-header-center">
+            <div class="top-header-title">Invoice/Credit</div>
+            <div class="top-header-cell">CELL : 9248933593, 9030812416</div>
         </div>
 
-       <!-- HEADER SECTION -->
-<div class="header">
-
-    <div class="company">
-
-        <h2>PADMAVATHI DAIRY PRODUCTS</h2>
-
-        <h4><b>Dealers : TELANGANA VIJAYA DAIRY</b></h4>
-
-        <p>
-            <b>GSTIN : 36SIPK5952J1ZA</b>
-
-            <br><b>Plot No. 46, Manipuri Colony, Saroornagar</b></br>
-
-            <b>Hyderabad, 500035</b>
-
-        </p>
-
-    </div>
-
-    <div class="logo">
-
-        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vijaya Dairy Logo">
-
-        <div class="date-row">
-            <b>Date :</b>
-            <span>
-                {{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}
-            </span>
-        </div>
-
-    </div>
-
-</div>
-
-        <hr>
+        <!-- BUSINESS HEADER SECTION -->
+        <table class="header-table">
+            <tr>
+                <td style="text-align: left; vertical-align: top;">
+                    <div class="business-title">PADMAVATHI DAIRY PRODUCTS</div>
+                    <div class="business-info"><b>Dealers: TELANGANA VIJAYA DAIRY</b></div>
+                    <div class="business-info" style="margin-top: 4px;">
+                        <b>GSTIN: 36SIPK5952J1ZA</b><br>
+                        <span class="address-bold">Plot No. 46, Manipuri Colony, Saroornagar</span><br>
+                        <span class="address-bold">Hyderabad - 500035</span>
+                    </div>
+                </td>
+                <td style="text-align: right; vertical-align: top;">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" class="logo-img" alt="Vijaya Dairy Logo">
+                    <div class="date-row">
+                        <b>Date: </b>
+                        <span>{{ invoice.invoice_date[8:10] }}-{{ invoice.invoice_date[5:7] }}-{{ invoice.invoice_date[0:4] }}</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
 
         <!-- INVOICE DETAILS SECTION -->
-        <div class="invoice-info">
-            <div class="bill-label">
-                Bill No : <span class="billno">{{ invoice.bill_no }}</span>
-            </div>
-
-           <div class="daterange">
-                Date Range :
+        <div class="bill-info">
+            <div><b>Bill No:</b> <span class="bill-no-red">{{ invoice.bill_no }}</span></div>
+            <div><b>Customer:</b> <span class="customer-bold">{{ invoice.customer }}</span></div>
+            <div><b>Product:</b> <span>Milk &amp; Milk Products</span></div>
+            <div>
+                <b>Date Range:</b> 
                 <span>
                     {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
                     to
                     {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
                 </span>
             </div>
-
-            <div class="customer">
-                Customer : <span>{{ invoice.customer }}</span>
-            </div>
-
-            <div class="product">
-                Product : <span>Milk &amp; Milk Products</span>
-            </div>
         </div>
 
-        <!-- TABLE SECTION -->
-        <table>
+        <!-- ITEMS TABLE SECTION -->
+        <table class="data-table">
             <thead>
                 <tr>
-                    <th rowspan="2">S.No</th>
-                    <th rowspan="2">Date</th>
-                    <th rowspan="2">Product</th>
-                    <th rowspan="2">Price</th>
-                    <th rowspan="2">Qty</th>
-                    <th rowspan="2">Actual Amt</th>
-                    <th colspan="2">CGST</th>
-                    <th colspan="2">SGST</th>
-                    <th rowspan="2">Total</th>
-                </tr>
-                <tr>
-                    <th>%</th>
-                    <th>Amt</th>
-                    <th>%</th>
-                    <th>Amt</th>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Actual Amt</th>
+                    <th>CGST %</th>
+                    <th>CGST Amt</th>
+                    <th>SGST %</th>
+                    <th>SGST Amt</th>
+                    <th>Total Amt</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in invoice.items %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>
-                        {{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}
-                    </td>
+                    <td>{{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}</td>
                     <td>{{ item.product }}</td>
                     <td>{{ "%.2f"|format(item.price) }}</td>
-                    <td>{{ "%.2f"|format(item.quantity) }}</td>
+                    <td>{{ "%.0f"|format(item.quantity) }}</td>
                     <td>{{ "%.2f"|format(item.actual_amount) }}</td>
-                    <td>{{ "%.2f"|format(item.cgst) }}%</td>
+                    <td>{{ "%.1f"|format(item.cgst) }}%</td>
                     <td>{{ "%.2f"|format(item.cgst_amount) }}</td>
-                    <td>{{ "%.2f"|format(item.sgst) }}%</td>
+                    <td>{{ "%.1f"|format(item.sgst) }}%</td>
                     <td>{{ "%.2f"|format(item.sgst_amount) }}</td>
                     <td>{{ "%.2f"|format(item.total) }}</td>
                 </tr>
@@ -126,25 +90,22 @@
             </tbody>
         </table>
 
-        <!-- GRAND TOTAL SECTION -->
-        <!-- GRAND TOTAL SECTION -->
-        <div class="grand-wrapper">
-            <div class="grand-box">
+        <!-- GRAND TOTAL BOX SECTION -->
+        <div class="grand-total-wrapper">
+            <div class="grand-total-box">
                 <span class="grand-title">Grand Total :</span>
-                <span class="grand-amount">
-                    ₹ {{ "%.2f"|format(invoice.grand_total) }}
-                </span>
+                <span class="grand-amount-red">₹ {{ "%.2f"|format(invoice.grand_total) }}</span>
             </div>
         </div>
 
-    </div>
-
-    <!-- SIGNATURE SECTION (ANCHORED AT BOTTOM) -->
-    <div class="signature">
-        <span class="sign-text">Signature:</span>
-        <div class="sign-line-wrapper">
-            <img src="{{ url_for('static', filename='images/Susignature.png') }}" alt="Signature">
+        <!-- SIGNATURE SECTION -->
+        <div class="signature-container">
+            <span class="signature-title">Signature:</span>
+            <div class="sig-img-wrapper">
+                <img src="{{ url_for('static', filename='images/Susignature.png') }}" class="sig-img" alt="Signature">
+            </div>
         </div>
+
     </div>
 
 </body>
