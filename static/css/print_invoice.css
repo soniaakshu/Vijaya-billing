@@ -82,26 +82,25 @@ body {
   font-weight: bold;
 }
 
-/* Data Table Styling */
+/* Data Table Styling (Vertical Column Lines Only - Matching Image 2 Layout) */
 table.data-table { 
   width: 100%; 
   border-collapse: collapse; 
   margin-top: 10px; 
   font-size: 13.5px; 
-}
-table.data-table th, table.data-table td { 
-  border: 1px solid #444; 
-  padding: 6px 4px; 
-  text-align: center; 
-  line-height: 1.2;
+  border: 1.5px solid #000; /* Outer black box frame */
 }
 
-/* Blue & Red Header Styles (Image 1 Layout) */
+/* Blue & Red Header Styles */
 table.data-table th { 
   background-color: #0d6efd !important; /* Blue Header */
   color: #ffffff !important; 
   font-weight: bold;
   font-size: 13.5px;
+  border: 1px solid #000;
+  padding: 6px 4px;
+  text-align: center;
+  line-height: 1.2;
   -webkit-print-color-adjust: exact; 
   print-color-adjust: exact;
 }
@@ -109,19 +108,38 @@ table.data-table th {
 table.data-table th.header-red {
   background-color: #cc0000 !important; /* Red Subheader */
   color: #ffffff !important;
+  border: 1px solid #000;
   -webkit-print-color-adjust: exact; 
   print-color-adjust: exact;
 }
 
+/* Table Body Cells - Removes horizontal row lines, keeps vertical column borders */
+table.data-table tbody td { 
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+  border-top: none;
+  border-bottom: none; /* No row lines */
+  padding: 8px 4px; 
+  text-align: center; 
+  line-height: 1.2;
+  vertical-align: top; /* Keeps item text top-aligned */
+}
+
+/* Extends vertical column lines downward */
+table.data-table tbody tr:last-child td {
+  height: 320px; 
+}
+
 /* Footer & Grand Total Row */
 table.data-table tfoot td {
+  border: 1px solid #000;
   font-weight: bold;
   font-size: 14px;
   padding: 8px 4px;
 }
 
 table.data-table tfoot td.footer-empty {
-  border-right: none;
+  border-right: 1px solid #000;
 }
 
 table.data-table tfoot td.grand-total-label {
