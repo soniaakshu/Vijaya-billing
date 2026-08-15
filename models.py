@@ -7,18 +7,12 @@ class Invoice(db.Model):
     __tablename__ = "invoices"
 
     id = db.Column(db.Integer, primary_key=True)
-
     bill_no = db.Column(db.String(30), nullable=False)
-
     customer = db.Column(db.String(200), nullable=False)
     company = db.Column(db.String(30), nullable=False)
-
     invoice_date = db.Column(db.String(20))
-
     from_date = db.Column(db.String(20))
-    
     to_date = db.Column(db.String(20))
-
     grand_total = db.Column(db.Float, default=0)
 
     items = db.relationship(
@@ -52,6 +46,9 @@ class InvoiceItem(db.Model):
     # Quantity
     quantity = db.Column(db.Float)
 
+    # Unit of Measurement (ADDED THIS LINE)
+    uom = db.Column(db.String(20))
+
     # Price × Quantity
     actual_amount = db.Column(db.Float)
 
@@ -69,6 +66,8 @@ class InvoiceItem(db.Model):
 
     # Final Total
     total = db.Column(db.Float)
+
+
 class Admin(db.Model):
     __tablename__ = "admins"
 
