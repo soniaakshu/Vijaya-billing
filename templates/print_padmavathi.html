@@ -47,9 +47,13 @@
             <div>
                 <b>Date Range:</b> 
                 <span>
-                    {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
-                    to
-                    {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
+                    {% if invoice.from_date and invoice.to_date %}
+                        {{ invoice.from_date[8:10] }}-{{ invoice.from_date[5:7] }}-{{ invoice.from_date[0:4] }}
+                        to
+                        {{ invoice.to_date[8:10] }}-{{ invoice.to_date[5:7] }}-{{ invoice.to_date[0:4] }}
+                    {% else %}
+                        N/A
+                    {% endif %}
                 </span>
             </div>
         </div>
@@ -63,6 +67,7 @@
                     <th>Product</th>
                     <th>Price</th>
                     <th>Qty</th>
+                    <th>UOM</th>
                     <th>Actual Amt</th>
                     <th>CGST %</th>
                     <th>CGST Amt</th>
@@ -77,14 +82,15 @@
                     <td>{{ loop.index }}</td>
                     <td>{{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}</td>
                     <td>{{ item.product }}</td>
-                    <td>{{ "%.2f"|format(item.price) }}</td>
-                    <td>{{ "%.0f"|format(item.quantity) }}</td>
-                    <td>{{ "%.2f"|format(item.actual_amount) }}</td>
-                    <td>{{ "%.1f"|format(item.cgst) }}%</td>
-                    <td>{{ "%.2f"|format(item.cgst_amount) }}</td>
-                    <td>{{ "%.1f"|format(item.sgst) }}%</td>
-                    <td>{{ "%.2f"|format(item.sgst_amount) }}</td>
-                    <td>{{ "%.2f"|format(item.total) }}</td>
+                    <td>{{ "%.2f"|format(item.price|float) }}</td>
+                    <td>{{ item.qty or item.quantity }}</td>
+                    <td>{{ item.uom or '-' }}</td>
+                    <td>{{ "%.2f"|format((item.actual_amt or item.actual_amount)|float) }}</td>
+                    <td>{{ "%.1f"|format(item.cgst|float) }}%</td>
+                    <td>{{ "%.2f"|format((item.cgst_amt or item.cgst_amount)|float) }}</td>
+                    <td>{{ "%.1f"|format(item.sgst|float) }}%</td>
+                    <td>{{ "%.2f"|format((item.sgst_amt or item.sgst_amount)|float) }}</td>
+                    <td>{{ "%.2f"|format(item.total|float) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -94,7 +100,7 @@
         <div class="grand-total-wrapper">
             <div class="grand-total-box">
                 <span class="grand-title">Grand Total :</span>
-                <span class="grand-amount-red">₹ {{ "%.2f"|format(invoice.grand_total) }}</span>
+                <span class="grand-amount-red">₹ {{ "%.2f"|format(invoice.grand_total|float) }}</span>
             </div>
         </div>
 
