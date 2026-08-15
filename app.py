@@ -466,7 +466,7 @@ def delete_invoice(invoice_id):
         url_for("history")
     )
 # --------------------------------------------------
-# Save Invoice (Updated to handle "Others" fields)
+# Save Invoice (Updated to handle "Others" fields & UOM)
 # --------------------------------------------------
 
 @app.route("/save-invoice", methods=["POST"])
@@ -516,6 +516,7 @@ def save_invoice():
     custom_products = request.form.getlist("custom_product[]")  # Reads custom typed products
     prices = request.form.getlist("price[]")
     qtys = request.form.getlist("qty[]")
+    uoms = request.form.getlist("uom[]")  # <-- Captures UOM array from form
 
     actual_amounts = request.form.getlist("actual_amt[]")
 
@@ -542,6 +543,7 @@ def save_invoice():
             product=prod_name,
             price=float(prices[i] or 0),
             quantity=float(qtys[i] or 0),
+            uom=uoms[i].strip() if i < len(uoms) else "",  # <-- Save UOM to DB
             actual_amount=float(actual_amounts[i] or 0),
             cgst=float(cgsts[i] or 0),
             cgst_amount=float(cgst_amounts[i] or 0),
