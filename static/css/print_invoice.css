@@ -95,6 +95,8 @@ table.data-table th, table.data-table td {
   text-align: center; 
   line-height: 1.2;
 }
+
+/* Blue & Red Header Styles (Image 1 Layout) */
 table.data-table th { 
   background-color: #0d6efd !important; /* Blue Header */
   color: #ffffff !important; 
@@ -104,26 +106,33 @@ table.data-table th {
   print-color-adjust: exact;
 }
 
-/* Grand Total Box Section */
-.grand-total-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 15px;
+table.data-table th.header-red {
+  background-color: #cc0000 !important; /* Red Subheader */
+  color: #ffffff !important;
+  -webkit-print-color-adjust: exact; 
+  print-color-adjust: exact;
 }
-.grand-total-box {
-  border: 1.5px solid #333;
-  padding: 6px 16px;
-  font-size: 18px;
+
+/* Footer & Grand Total Row */
+table.data-table tfoot td {
   font-weight: bold;
-  background-color: #fff;
-  display: inline-block;
+  font-size: 14px;
+  padding: 8px 4px;
 }
-.grand-title {
-  margin-right: 8px;
+
+table.data-table tfoot td.footer-empty {
+  border-right: none;
 }
-.grand-amount-red {
-  color: #d9534f; /* Red Total */
-  font-weight: bold;
+
+table.data-table tfoot td.grand-total-label {
+  color: #cc0000;
+  text-align: right !important;
+  padding-right: 12px !important;
+}
+
+table.data-table tfoot td.grand-total-val {
+  color: #cc0000;
+  font-size: 14px;
 }
 
 /* Signature Layout Fix */
@@ -172,6 +181,12 @@ table.data-table th {
   }
   table.data-table th { 
     background-color: #0d6efd !important; 
+    color: #ffffff !important; 
+    -webkit-print-color-adjust: exact; 
+    print-color-adjust: exact;
+  }
+  table.data-table th.header-red { 
+    background-color: #cc0000 !important; 
     color: #ffffff !important; 
     -webkit-print-color-adjust: exact; 
     print-color-adjust: exact;
