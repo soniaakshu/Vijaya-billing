@@ -62,47 +62,48 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>S.No</th>
-                    <th>Date</th>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>UOM</th>
-                    <th>Actual Amt</th>
-                    <th>CGST %</th>
-                    <th>CGST Amt</th>
-                    <th>SGST %</th>
-                    <th>SGST Amt</th>
-                    <th>Total Amt</th>
+                    <th rowspan="2">S.No</th>
+                    <th rowspan="2">Product</th>
+                    <th rowspan="2">Price</th>
+                    <th rowspan="2">Qty</th>
+                    <th rowspan="2">UOM</th>
+                    <th rowspan="2">Actual Amt</th>
+                    <th colspan="2" class="header-blue">CGST</th>
+                    <th colspan="2" class="header-blue">SGST</th>
+                    <th rowspan="2">Total</th>
+                </tr>
+                <tr>
+                    <th class="header-red">%</th>
+                    <th class="header-red">AMT</th>
+                    <th class="header-red">%</th>
+                    <th class="header-red">AMT</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in invoice.items %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ item.item_date[8:10] }}-{{ item.item_date[5:7] }}-{{ item.item_date[0:4] }}</td>
                     <td>{{ item.product }}</td>
                     <td>{{ "%.2f"|format(item.price|float) }}</td>
                     <td>{{ item.qty or item.quantity }}</td>
-                    <td>{{ item.uom or '-' }}</td>
+                    <td>{{ item.uom if item.uom else '-' }}</td>
                     <td>{{ "%.2f"|format((item.actual_amt or item.actual_amount)|float) }}</td>
-                    <td>{{ "%.1f"|format(item.cgst|float) }}%</td>
+                    <td>{{ "%.1f"|format(item.cgst|float) }}</td>
                     <td>{{ "%.2f"|format((item.cgst_amt or item.cgst_amount)|float) }}</td>
-                    <td>{{ "%.1f"|format(item.sgst|float) }}%</td>
+                    <td>{{ "%.1f"|format(item.sgst|float) }}</td>
                     <td>{{ "%.2f"|format((item.sgst_amt or item.sgst_amount)|float) }}</td>
                     <td>{{ "%.2f"|format(item.total|float) }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="footer-empty"></td>
+                    <td colspan="4" class="grand-total-label">Grand Total</td>
+                    <td class="grand-total-val">₹ {{ "%.2f"|format(invoice.grand_total|float) }}</td>
+                </tr>
+            </tfoot>
         </table>
-
-        <!-- GRAND TOTAL BOX SECTION -->
-        <div class="grand-total-wrapper">
-            <div class="grand-total-box">
-                <span class="grand-title">Grand Total :</span>
-                <span class="grand-amount-red">₹ {{ "%.2f"|format(invoice.grand_total|float) }}</span>
-            </div>
-        </div>
 
         <!-- SIGNATURE SECTION -->
         <div class="signature-container">
