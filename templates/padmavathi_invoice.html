@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="card shadow">
         <div class="card-body p-4">
 
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <!-- Company -->
+                <!-- Company Info -->
                 <div class="row align-items-start">
                     <div class="col-md-9">
                         <h2 class="text-primary">
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="col-md-3 text-end">
-                        <img src="{{ url_for('static', filename='images/logo.png') }}" width="150">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" width="150" alt="Logo" class="img-fluid">
                         <br><br>
                         <label for="invoiceDate"><b>Invoice Date</b></label>
                         <input
