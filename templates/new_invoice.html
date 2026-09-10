@@ -2,6 +2,41 @@
 
 {% block content %}
 
+<!-- Custom CSS to fix input squishing on smaller laptop screens -->
+<style>
+    /* Responsive Table Wrap */
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+    }
+
+    /* Fixed Table Layout for Uniform Column Widths */
+    #productTable {
+        min-width: 1100px; /* Forces full width on small screens so fields don't clip */
+        table-layout: fixed;
+    }
+
+    /* Input Field Padding & Styling */
+    #productTable input.form-control,
+    #productTable select.form-select {
+        padding: 4px 2px !important;
+        font-size: 13px !important;
+        text-align: center;
+    }
+
+    /* Remove Number Field Spinner Arrows to Save Space */
+    #productTable input[type=number]::-webkit-inner-spin-button, 
+    #productTable input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    #productTable input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
 <div class="container-fluid">
     <div class="card shadow">
         <div class="card-body p-4">
@@ -159,86 +194,103 @@
 
                 <hr>
 
-                <!-- Products Table -->
-                <table class="table table-bordered align-middle" id="productTable">
-                    <thead class="table-primary text-center">
-                        <tr>
-                            <th rowspan="2">S.No</th>
-                            <th rowspan="2" style="width: 130px;">Date</th>
-                            <th rowspan="2" style="width: 180px;">Product</th>
-                            <th rowspan="2">Price</th>
-                            <th rowspan="2">Qty</th>
-                            <th rowspan="2" style="width: 90px;">UOM</th>
-                            <th rowspan="2">Actual Amt</th>
-                            <th colspan="2">CGST</th>
-                            <th colspan="2">SGST</th>
-                            <th rowspan="2">Total</th>
-                            <th rowspan="2">Action</th>
-                        </tr>
-                        <tr>
-                            <th>%</th>
-                            <th>Amt</th>
-                            <th>%</th>
-                            <th>Amt</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="row-sno text-center">1</td>
-                            <td>
-                                <input type="date" class="form-control" name="item_date[]">
-                            </td>
-                            <td>
-                                <select class="form-select product" name="product[]">
-                                    <option>Milk</option>
-                                    <option>Curd</option>
-                                    <option>Paneer</option>
-                                    <option>Ghee</option>
-                                    <option>Ice Cream</option>
-                                    <option>Doodhpeda</option>
-                                    <option>Kowa</option>
-                                    <option>Cake</option>
-                                    <option value="Others">Others</option>
-                                </select>
-                                <input
-                                    type="text"
-                                    class="form-control mt-2 otherProduct"
-                                    placeholder="Product Name"
-                                    style="display:none;">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control price" name="price[]" min="0" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control qty" name="qty[]" min="0" step="any">
-                            </td>
-                            <td>
-                                <input type="text" class="form-control uom" name="uom[]" placeholder="Ltr/Kg">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control actualAmt" name="actual_amt[]" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control cgst" name="cgst[]" value="2.5" min="0" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control cgstAmt" name="cgst_amt[]" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control sgst" name="sgst[]" value="2.5" min="0" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control sgstAmt" name="sgst_amt[]" step="any">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control total" name="total[]" step="any">
-                            </td>
-                            <td class="text-center">
-                                <button type="button" class="btn btn-danger btn-sm deleteRow">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Responsive Scroll Wrapper Added Here -->
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle" id="productTable">
+                        <colgroup>
+                            <col style="width: 45px;">  <!-- S.No -->
+                            <col style="width: 135px;"> <!-- Date -->
+                            <col style="width: 140px;"> <!-- Product -->
+                            <col style="width: 75px;">  <!-- Price -->
+                            <col style="width: 65px;">  <!-- Qty -->
+                            <col style="width: 75px;">  <!-- UOM -->
+                            <col style="width: 95px;">  <!-- Actual Amt -->
+                            <col style="width: 55px;">  <!-- CGST % -->
+                            <col style="width: 75px;">  <!-- CGST Amt -->
+                            <col style="width: 55px;">  <!-- SGST % -->
+                            <col style="width: 75px;">  <!-- SGST Amt -->
+                            <col style="width: 95px;">  <!-- Total -->
+                            <col style="width: 70px;">  <!-- Action -->
+                        </colgroup>
+                        <thead class="table-primary text-center">
+                            <tr>
+                                <th rowspan="2">S.No</th>
+                                <th rowspan="2">Date</th>
+                                <th rowspan="2">Product</th>
+                                <th rowspan="2">Price</th>
+                                <th rowspan="2">Qty</th>
+                                <th rowspan="2">UOM</th>
+                                <th rowspan="2">Actual Amt</th>
+                                <th colspan="2">CGST</th>
+                                <th colspan="2">SGST</th>
+                                <th rowspan="2">Total</th>
+                                <th rowspan="2">Action</th>
+                            </tr>
+                            <tr>
+                                <th>%</th>
+                                <th>Amt</th>
+                                <th>%</th>
+                                <th>Amt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="row-sno text-center">1</td>
+                                <td>
+                                    <input type="date" class="form-control" name="item_date[]">
+                                </td>
+                                <td>
+                                    <select class="form-select product" name="product[]">
+                                        <option>Milk</option>
+                                        <option>Curd</option>
+                                        <option>Paneer</option>
+                                        <option>Ghee</option>
+                                        <option>Ice Cream</option>
+                                        <option>Doodhpeda</option>
+                                        <option>Kowa</option>
+                                        <option>Cake</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <input
+                                        type="text"
+                                        class="form-control mt-2 otherProduct"
+                                        placeholder="Product Name"
+                                        style="display:none;">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control price" name="price[]" min="0" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control qty" name="qty[]" min="0" step="any">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control uom" name="uom[]" placeholder="Ltr/Kg">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control actualAmt" name="actual_amt[]" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control cgst" name="cgst[]" value="2.5" min="0" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control cgstAmt" name="cgst_amt[]" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control sgst" name="sgst[]" value="2.5" min="0" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control sgstAmt" name="sgst_amt[]" step="any">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control total" name="total[]" step="any">
+                                </td>
+                                <td class="text-center">
+                                    <button type="button" class="btn btn-danger btn-sm deleteRow">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <button type="button" class="btn btn-success" id="addRow">
                     + Add Product
