@@ -109,32 +109,34 @@
 
         
         <!-- SIGNATURE SECTION -->
-        
+
         {% set no_signature_colleges = [
-            'MJPTBC COE GIRLS (Saroornagar)',
-            'The Principle TGSWRS Saroornagar',
-            'MJPTBC NAGOLE COE GIRLS',
-            'MJPTBCWRJC GHATKESAR COE GIRLS (Boduppal)',
-            'TGRS/JC BOYS (Borabanda)',
-            'TGRS/JC GIRLS BORABANDA',
-            'TGSWRS COE Girls (Falaknuma)',
-            'TGSWRS/JC GIRLS NARSINGI'
+            'mjptbccoegirlssaroornagar',
+            'theprincipletgswrssaroornagar',
+            'mjptbcnagolecoegirls',
+            'mjptbcwrjcghatkesarcoegirls(boduppal)',
+            'tgrs/jcboys(borabanda)',
+            'tgrs/jcgirlsborabanda',
+            'tgswr scoegirls(falaknuma)',
+            'tgswrs/jcgirlsnarsingi'
         ] %}
         
         {% set customer_name = invoice.customer | lower | replace(' ', '') %}
-        {% set excluded_names = no_signature_colleges | map('lower') | map('replace', ' ', '') | list %}
-        
-        {% if customer_name not in excluded_names %}
         
         <div class="signature-container">
-            <span class="signature-title">Signature:</span>
-            <div class="sig-img-wrapper">
-                <img src="{{ url_for('static', filename='images/Susignature.png') }}"
-                     class="sig-img" alt="Signature">
-            </div>
-        </div>
         
-        {% endif %}
+            <span class="signature-title">Signature:</span>
+        
+            <div class="sig-img-wrapper"
+                 {% if customer_name in no_signature_colleges %}
+                 style="border-bottom: 1px solid #000; min-height: 25px;"
+                 {% endif %}>
+        
+                {% if customer_name not in no_signature_colleges %}
+                    <img src="{{ url_for('static', filename='images/Susignature.png') }}"
+                         class="sig-img" alt="Signature">
+                {% endif %}
+
         
 
     </div>
